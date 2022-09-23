@@ -1,8 +1,9 @@
 package SPL;
 
+
 import java.util.Scanner;
 
-public class GaussElimination {
+public class GaussElimination{
 
     /** function to print in row echelon form **/
     public void printEselonBaris(double[][] var, double[] sumEq,int N,int M)
