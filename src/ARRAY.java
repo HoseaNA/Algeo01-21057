@@ -1,5 +1,3 @@
-package SPL;
-
 public class ARRAY {
     double[] Arr = new double[100];
     int Len = Arr.length;

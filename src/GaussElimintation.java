@@ -1,6 +1,3 @@
-package SPL;
-
-
 import java.util.Scanner;
 
 public class GaussElimination{

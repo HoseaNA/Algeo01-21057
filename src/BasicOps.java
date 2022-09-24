@@ -1,5 +1,3 @@
-package BasicOperations;
-
 import java.util.Scanner;
 
 public class BasicOps {
