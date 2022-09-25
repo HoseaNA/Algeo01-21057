@@ -275,7 +275,6 @@ public class MATRIKS {
     }
 
     public static double[][] transpose(double[][] mat){
-        int i, j;
         double[][] transposeMat = new double[mat[0].length][mat.length];
 
         for (int i = 0;i < transposeMat.length;i++){
