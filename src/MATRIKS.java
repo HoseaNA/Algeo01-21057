@@ -14,7 +14,6 @@ public class MATRIKS {
     MATRIKS(int baris, int kolom) {
         this.RowEff = baris;
         this.ColEff = kolom;
-
     }
 
 
@@ -100,99 +99,99 @@ public class MATRIKS {
         System.out.println();
     }
 
-    public static double[][] GaussJordan(double[][] mat){
-        int Row = mat.length;
-        int Col = mat[0].length;
+    // public static double[][] GaussJordan(double[][] mat){
+    //     int Row = mat.length;
+    //     int Col = mat[0].length;
 
-        if (Col <= Row){
-            int inCol = 0;
-            for (int k = 0; k < Col - 1; k++){
-                if (inCol == Col-1){
-                    break;
-                }
-                while (isColZero(mat,inCol) && (inCol < Col)){
-                    inCol++;
-                }
-                double pivot = mat[k][inCol];
+    //     if (Col <= Row){
+    //         int inCol = 0;
+    //         for (int k = 0; k < Col - 1; k++){
+    //             if (inCol == Col-1){
+    //                 break;
+    //             }
+    //             while (isColZero(mat,inCol) && (inCol < Col)){
+    //                 inCol++;
+    //             }
+    //             double pivot = mat[k][inCol];
 
-                if(pivot == 0){
-                    for (int i = k + 1;i < Row;i++){
-                        if(mat[i][inCol] != 0){
-                            for (int j = 0;j < Col;j++){
-                                double temp = mat[k][j];
-                                mat[k][j] = mat[i][j];
-                                mat[i][j] = temp;
-                            }
-                            break;
-                        }
-                    }
-                }
-                pivot = mat[k][inCol];
-                if (pivot == 0){
-                    continue;
-                } else {
-                    for (int j = inCol;j < Col;j++){
-                        mat[k][j] = mat[k][j]/pivot;
-                    }
-                    for (int i = 0;i < Row;i++){
-                        if (i == k || mat[i][inCol] == 0){
-                            continue;
-                        }
-                        double factor = mat[i][inCol];
-                        for (int j = 0;j < Col;j++){
-                            mat[i][j] = mat[i][j] - (factor * mat[k][j]);
-                        }
-                    }
-                }
-                inCol++;
-            }
-        } else {
-            int inCol = 0;
-            for (int k = 0;k < Row;k++){
-                if (inCol == Col-1){
-                    break;
-                }
+    //             if(pivot == 0){
+    //                 for (int i = k + 1;i < Row;i++){
+    //                     if(mat[i][inCol] != 0){
+    //                         for (int j = 0;j < Col;j++){
+    //                             double temp = mat[k][j];
+    //                             mat[k][j] = mat[i][j];
+    //                             mat[i][j] = temp;
+    //                         }
+    //                         break;
+    //                     }
+    //                 }
+    //             }
+    //             pivot = mat[k][inCol];
+    //             if (pivot == 0){
+    //                 continue;
+    //             } else {
+    //                 for (int j = inCol;j < Col;j++){
+    //                     mat[k][j] = mat[k][j]/pivot;
+    //                 }
+    //                 for (int i = 0;i < Row;i++){
+    //                     if (i == k || mat[i][inCol] == 0){
+    //                         continue;
+    //                     }
+    //                     double factor = mat[i][inCol];
+    //                     for (int j = 0;j < Col;j++){
+    //                         mat[i][j] = mat[i][j] - (factor * mat[k][j]);
+    //                     }
+    //                 }
+    //             }
+    //             inCol++;
+    //         }
+    //     } else {
+    //         int inCol = 0;
+    //         for (int k = 0;k < Row;k++){
+    //             if (inCol == Col-1){
+    //                 break;
+    //             }
 
-                while (isColZero(mat,inCol) && inCol < Col){
-                    inCol++;
-                }
+    //             while (isColZero(mat,inCol) && inCol < Col){
+    //                 inCol++;
+    //             }
 
-                double pivot = mat[k][inCol];
-                if (pivot == 0){
-                    for (int i = k+1;i < Row;i++){
-                        if (mat[i][inCol] != 0){
-                            for (int j = 0;j < Col;j++){
-                                double temp = mat[k][j];
-                                mat[k][j] = mat[i][j];
-                                mat[i][j] = temp;
-                            }
-                            break;
-                        }
-                    }
-                }
-                pivot = mat[k][inCol];
-                if (pivot == 0){
-                    continue;
-                } else {
-                    for (int j = inCol;j < Col;j++){
-                        mat[k][j] = mat[k][j]/pivot;
-                    }
+    //             double pivot = mat[k][inCol];
+    //             if (pivot == 0){
+    //                 for (int i = k+1;i < Row;i++){
+    //                     if (mat[i][inCol] != 0){
+    //                         for (int j = 0;j < Col;j++){
+    //                             double temp = mat[k][j];
+    //                             mat[k][j] = mat[i][j];
+    //                             mat[i][j] = temp;
+    //                         }
+    //                         break;
+    //                     }
+    //                 }
+    //             }
+    //             pivot = mat[k][inCol];
+    //             if (pivot == 0){
+    //                 continue;
+    //             } else {
+    //                 for (int j = inCol;j < Col;j++){
+    //                     mat[k][j] = mat[k][j]/pivot;
+    //                 }
 
-                    for (int i = 0;i < Row;i++){
-                        if (i == k || mat[i][inCol] == 0){
-                            continue;
-                        }
-                        double factor = mat[i][inCol];
-                        for (int j = inCol;j < Col;j++){
-                            mat[i][j] = mat[i][j] - (factor * mat[k][j]);
-                        }
-                    }
-                }
-                inCol++;
-            }
-        }
-        return mat;
-    }
+    //                 for (int i = 0;i < Row;i++){
+    //                     if (i == k || mat[i][inCol] == 0){
+    //                         continue;
+    //                     }
+    //                     double factor = mat[i][inCol];
+    //                     for (int j = inCol;j < Col;j++){
+    //                         mat[i][j] = mat[i][j] - (factor * mat[k][j]);
+    //                     }
+    //                 }
+    //             }
+    //             inCol++;
+    //         }
+    //     }
+    //     return mat;
+    // }
 
     public static boolean isColZero(double[][] mat, int inCol){
         boolean ColZero = true;
@@ -205,26 +204,26 @@ public class MATRIKS {
         return ColZero;
     }
 
-    public static double det(double[][] mat){
-        int Row = mat.length;
-        double det = 0;
-        double lowerDet;
+    // public static double det(double[][] mat){
+    //     int Row = mat.length;
+    //     double det = 0;
+    //     double lowerDet;
 
-        if (Row == 1){
-            det = mat[0][0];
-        } else {
-            for (int i = 0;i < Row;i++){
-                int c = 1;
-                if (i%2 == 1){
-                    c = -1;
-                }
-                lowerDet = det(oneLower(mat,1,i+1));
+    //     if (Row == 1){
+    //         det = mat[0][0];
+    //     } else {
+    //         for (int i = 0;i < Row;i++){
+    //             int c = 1;
+    //             if (i%2 == 1){
+    //                 c = -1;
+    //             }
+    //             lowerDet = det(oneLower(mat,1,i+1));
 
-                det += c * mat[0][i] * lowerDet;
-            }
-        }
-        return det;
-    }
+    //             det += c * mat[0][i] * lowerDet;
+    //         }
+    //     }
+    //     return det;
+    // }
 
     public static double[][] oneLower(double[][] mat, int Row, int Col){
         int size = mat.length;
@@ -266,7 +265,7 @@ public class MATRIKS {
                     if ((i + j)%2 == 1){
                         c = -1;
                     }
-                    lowerDet = det(oneLower(mat,i+1,j+1));
+                    lowerDet = OBE.detOBE(oneLower(mat,i+1,j+1));
                     cofMat[i][j] = c * lowerDet;
                 }
             }

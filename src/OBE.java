@@ -1,5 +1,3 @@
-package Determinan;
-
 public class OBE {
 
     static void printMatrix(double[][] dataArray){
@@ -54,7 +52,7 @@ public class OBE {
         return dataArray[curRow][curCol];
     }
 
-    static double detOBE(double[][] dataArray){
+    public static double detOBE(double[][] dataArray){
         int lastRowIdx = dataArray.length-1;
         double detMatrix = 1;
         for(int i = 0; i <= lastRowIdx; i++){
