@@ -150,7 +150,7 @@ public class InvMatrix {
         double det = OBE.detOBE(mat);
         double[][] matCofactor = MATRIKS.Cofactor(mat);
         double[][] adjMat = MATRIKS.transpose(matCofactor);
-        double[][] finalMat = MATRIKS.multiplyMatbyConst(adjMat, 1 / det);
+        double[][] finalMat = MATRIKS.multiplyMatbyConst(adjMat, (1 / det));
 
         return finalMat;
     }

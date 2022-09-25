@@ -272,7 +272,7 @@ public class MATRIKS {
 
         for (int i = 0; i < transposeMat.length; i++) {
             for (int j = 0; j < transposeMat[0].length; j++) {
-                transposeMat[i][j] = mat[i][j];
+                transposeMat[i][j] = mat[j][i];
             }
         }
         return transposeMat;
