@@ -5,8 +5,10 @@ public class InvMatrix {
         System.out.println("Menu Invers Matriks :");
         System.out.println("1. Metode Gauss Jordan");
         System.out.println("2. Metode Kofaktor");
-        Scanner in = new Scanner(System.in);
+        System.out.println("\n");
 
+        System.out.println("Tentukan pilihan anda :");
+        Scanner in = new Scanner(System.in);
         int pilihan = in.nextInt();
         if (pilihan == 1) {
             double[][] Mat = ReadMatriksSym();
@@ -18,7 +20,6 @@ public class InvMatrix {
         } else if (pilihan == 2) {
             double[][] Mat = ReadMatriksSym();
             double[][] InvMat = new double[Mat.length][Mat[0].length];
-
             InvMat = InvCofactor(Mat);
             System.out.println("Hasil invers adalah :");
             printMatriks(InvMat);
@@ -147,7 +148,8 @@ public class InvMatrix {
     }
 
     public static double[][] InvCofactor(double[][] mat) {
-        double det = OBE.detOBE(mat);
+        double[][] copyMat = MATRIKS.CopyMatrix(mat) ;
+        double det = OBE.detOBE(copyMat);
         double[][] matCofactor = MATRIKS.Cofactor(mat);
         double[][] adjMat = MATRIKS.transpose(matCofactor);
         double[][] finalMat = MATRIKS.multiplyMatbyConst(adjMat, (1 / det));

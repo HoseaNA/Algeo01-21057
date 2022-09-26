@@ -245,13 +245,12 @@ public class MATRIKS {
         return lowerMat;
     }
 
-    public static double[][] Cofactor(double[][] mat) {
-        int size = mat.length;
+    public static double[][] Cofactor(double[][] Mat) {
+        int size = Mat.length;
         double[][] cofMat = new double[size][size];
         double lowerDet;
-
         if (size == 1) {
-            cofMat[0][0] = mat[0][0];
+            cofMat[0][0] = Mat[0][0];
         } else {
             for (int i = 0; i < size; i++) {
                 for (int j = 0; j < size; j++) {
@@ -259,7 +258,8 @@ public class MATRIKS {
                     if (((i + 1) + (j + 1)) % 2 == 1) {
                         c = -1;
                     }
-                    lowerDet = OBE.detOBE(minor(mat, i, j));
+                    lowerDet = OBE.detOBE(minor(Mat, i, j));
+                   
                     cofMat[i][j] = c * lowerDet;
                 }
             }
@@ -289,5 +289,15 @@ public class MATRIKS {
             }
         }
         return multipliedMat;
+    }
+
+    public static double [][] CopyMatrix(double [][] mat){
+        double [] [] mCopy = new double [mat.length][mat[0].length];
+        for(int i =0; i<mat.length;i++){
+            for(int j =0 ; j<mat[0].length;j++){
+                mCopy[i][j] = mat[i][j];
+            }
+        }
+        return mCopy;
     }
 }
