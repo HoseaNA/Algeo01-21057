@@ -8,8 +8,11 @@ public class InterPol {
         double[] X = new double[n];
         double[] Y = new double[n];
         ReadPoint(X, Y, n);
-        
+        double[][] MatXSym = CreateMatInterPol(X);
+        double[][] MatInterPol = MergeMatWithArr(MatXSym, Y);
+        double[] Coeff = SPLResult(MatInterPol);
 
+        printFunct(Coeff);
         in.close();
     }
 
@@ -33,14 +36,31 @@ public class InterPol {
                 Mat[i][j] = pow((X[i]),j);
             }
         }
-
         return Mat;
     }
 
-    public static void FinalFunctInterPol(double[][] Mat){
+    public static double[][] MergeMatWithArr(double[][] Mat, double[] Y){
+        double[][] NewMat = new double[Mat.length][Mat[0].length+1];
 
-        
+        for (int i = 0;i < Mat.length;i++){
+            for (int j = 0;j < Mat[0].length;j++){
+                NewMat[i][j] = Mat[i][j];
+                if (j == Mat[0].length-1){
+                    NewMat[i][j+1] = Y[i];
+                }
+            }
+        }
+        return NewMat;
+    }
 
+    public static double[] SPLResult(double[][] Mat){
+        double[] Result = new double[Mat.length];
+
+        MATRIKS.GaussJordan(Mat);
+        for (int i = 0;i < Mat.length;i++){
+            Result[i] = Mat[i][Mat[0].length-1];
+        }
+        return Result;
     }
 
     private static double pow(double d, int j) {
@@ -48,6 +68,21 @@ public class InterPol {
             return 1;
         } else {
             return d * pow(d,j-1);
+        }
+    }
+
+    public static void printFunct(double[] Res){
+        System.out.printf("p"+(Res.length-1)+"(x) = %.4f + ",Res[0]);
+        for (int i = 1;i < Res.length;i++){
+            if (i > 1){
+                if (i != Res.length-1){
+                    System.out.printf("%.4fX^"+(i)+" + ",Res[i]);
+                } else {
+                    System.out.printf("%.4fX^"+(i),Res[i]);
+                }
+            } else {
+                System.out.printf("%.4fX + ",Res[i]);
+            }
         }
     }
 }
