@@ -61,32 +61,57 @@ public class MATRIKS {
         scanner.close();
     }
 
-    public void readFileMatrix(String Path) {
+    public void readMatrixFile(String path)
+    {
         this.RowEff = 0;
         this.ColEff = 0;
-        // Dengan metode try
+        //membaca size matrix dari file
         try {
-            File file = new File(Path);
-            Scanner scanner = new Scanner(file);
+            File file = new File(path);
+            Scanner reader = new Scanner(file);
             int i = 0;
-            //
-            while (scanner.hasNextLine()) {
-                this.RowEff += 1;
-                Scanner colReader = new Scanner(scanner.nextLine());
-                while (colReader.hasNextDouble()) {
-                    if (i == 0) {
-                        this.ColEff += 1;
-                    }
+            while (reader.hasNextLine())
+            {
+                this.RowEff+=1;
+                Scanner colReader = new Scanner(reader.nextLine());
+                while(colReader.hasNextDouble())
+                {
+                    if (i == 0){this.ColEff+=1;}
                     colReader.nextDouble();
                 }
                 i += 1;
             }
-            scanner.close();
-        } catch (FileNotFoundException exit) {
-            System.out.println("File not Found");
-            exit.printStackTrace();
+            reader.close();
         }
-        // Algoritma isi Matrix (WIP)
+        catch (FileNotFoundException e)
+        {
+            System.out.println("File not found.");
+            e.printStackTrace();
+        }
+
+        //isi matrix
+        this.Mat = new double[this.RowEff][this.ColEff];
+        File file = new File("..\\test\\matrix.txt");
+        try{
+            Scanner rowReader = new Scanner(file);
+            for (int i = 0 ; i<this.RowEff ; i++)
+            {
+                Scanner colReader = new Scanner(rowReader.nextLine());
+                for (int j = 0 ; j<this.ColEff ; j++)
+                {
+                    double data = colReader.nextDouble();
+                    this.Mat[i][j] = data;
+                }
+                colReader.close();
+            }
+            rowReader.close();
+        }
+        catch (FileNotFoundException e)
+        {
+            System.out.println("File not found.");
+            e.printStackTrace();
+        }
+
     }
 
     public static void printMatrix(MATRIKS Matrix, ARRAY Array) {
@@ -97,100 +122,6 @@ public class MATRIKS {
             System.out.printf("| %.2f\n", Array.Arr[i]);
         }
         System.out.println();
-    }
-
-    public static double[][] GaussJordan(double[][] mat) {
-        int Row = mat.length;
-        int Col = mat[0].length;
-
-        if (Col <= Row) {
-            int inCol = 0;
-            for (int k = 0; k < Col - 1; k++) {
-                if (inCol == Col - 1) {
-                    break;
-                }
-                while (isColZero(mat, inCol) && (inCol < Col)) {
-                    inCol++;
-                }
-                double pivot = mat[k][inCol];
-
-                if (pivot == 0) {
-                    for (int i = k + 1; i < Row; i++) {
-                        if (mat[i][inCol] != 0) {
-                            for (int j = 0; j < Col; j++) {
-                                double temp = mat[k][j];
-                                mat[k][j] = mat[i][j];
-                                mat[i][j] = temp;
-                            }
-                            break;
-                        }
-                    }
-                }
-                pivot = mat[k][inCol];
-                if (pivot == 0) {
-                    continue;
-                } else {
-                    for (int j = inCol; j < Col; j++) {
-                        mat[k][j] = mat[k][j] / pivot;
-                    }
-                    for (int i = 0; i < Row; i++) {
-                        if (i == k || mat[i][inCol] == 0) {
-                            continue;
-                        }
-                        double factor = mat[i][inCol];
-                        for (int j = 0; j < Col; j++) {
-                            mat[i][j] = mat[i][j] - (factor * mat[k][j]);
-                        }
-                    }
-                }
-                inCol++;
-            }
-        } else {
-            int inCol = 0;
-            for (int k = 0; k < Row; k++) {
-                if (inCol == Col - 1) {
-                    break;
-                }
-
-                while (isColZero(mat, inCol) && inCol < Col) {
-                    inCol++;
-                }
-
-                double pivot = mat[k][inCol];
-                if (pivot == 0) {
-                    for (int i = k + 1; i < Row; i++) {
-                        if (mat[i][inCol] != 0) {
-                            for (int j = 0; j < Col; j++) {
-                                double temp = mat[k][j];
-                                mat[k][j] = mat[i][j];
-                                mat[i][j] = temp;
-                            }
-                            break;
-                        }
-                    }
-                }
-                pivot = mat[k][inCol];
-                if (pivot == 0) {
-                    continue;
-                } else {
-                    for (int j = inCol; j < Col; j++) {
-                        mat[k][j] = mat[k][j] / pivot;
-                    }
-
-                    for (int i = 0; i < Row; i++) {
-                        if (i == k || mat[i][inCol] == 0) {
-                            continue;
-                        }
-                        double factor = mat[i][inCol];
-                        for (int j = inCol; j < Col; j++) {
-                            mat[i][j] = mat[i][j] - (factor * mat[k][j]);
-                        }
-                    }
-                }
-                inCol++;
-            }
-        }
-        return mat;
     }
 
     public static boolean isColZero(double[][] mat, int inCol) {
