@@ -23,7 +23,7 @@ Hal yang perlu diunduh adalah sebagai berikut:
 ### Memulai Program
 1. _Clone_ _repository_ berikut
     ```sh
-    git clone https://github.com/hafidznrg/Algeo01-20056.git
+    git clone https://github.com/HoseaNA/Algeo01-21057.git
     ```
 2. Kemudian...
    
