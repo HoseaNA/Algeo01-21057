@@ -29,6 +29,6 @@ Hal yang perlu diunduh adalah sebagai berikut:
    
 ## Kontributor
 Program ini dibentuk oleh
-1. Hosea Nathanael Abetnego             (13520056)
-2. Ahmad Ghulam Ilham                   (13520105)
-3. Muhammad Naufal Nalendra             (13520117)
+1. Hosea Nathanael Abetnego             (13520057)
+2. Ahmad Ghulam Ilham                   (13521118)
+3. Muhammad Naufal Nalendra             (13521152)
