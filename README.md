@@ -2,7 +2,7 @@
 ## IF2123 Aljabar Linier dan Geometri
 
 ## Deskripsi
-Program ini dibuat untuk memenuhi Tugas Besar Pertama Mata Kuliah IF2123 Aljabar Linier dan Geometri. Bahasa yang digunakan untuk membentuk program ini adalah Java. Program ditujukan untuk menyelesaikan persoalan seperti:
+Program ini dibuat untuk memenuhi Tugas Besar Pertama Mata Kuliah IF2123 Aljabar Linier dan Geometri. Bahasa yang digunakan untuk membentuk program ini adalah Java. Program ditujukan untuk menyelesaikan persoalan seperti berikut:
 1. Menentukan solusi SPL dengan metode Gauss, Gauss-Jordan, Matriks Balikan, dan Kaidah Cramer.
 2. Menentukan Determinan matriks dengan metode Gauss, Gauss-Jordan, dan Ekspansi Kofaktor.
 3. Menentukan Matriks Balikan dengan metode Gauss-Jordan, dan Ekspansi Kofaktor.
