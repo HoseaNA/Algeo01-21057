@@ -4,6 +4,7 @@ public class MainProgram {
     // KAMUS GLOBAL
     boolean exit = false;
     static boolean backToMain = false;
+    static Scanner scanner = new Scanner(System.in);
     static final int rowCap = 100;
     static final int colcap = 100;
     public static void main(String[] args) {
@@ -75,6 +76,7 @@ public class MainProgram {
             System.out.println("Silahkan pilih metode input : ");
             System.out.println("1. Input from Keyboard");
             System.out.println("2. Input from File");
+            System.out.println("9. Kembali");
         }
 
         // Prosedur untuk memilih menu selanjutnya
@@ -127,36 +129,37 @@ public class MainProgram {
         /** PROSEDUR SPL **/
         public static void SPL(){
             {
-                //SPL ISI DI SINI
+
                 int choice = 0;
-                Scanner scanner = new Scanner(System.in);
-                displaySubSPL();
-                displayCommand();
-                choice = scanner.nextInt();
 
-                switch (choice)
-                {
-                    case 1:
-                        gaussianElim();
-                        break;
+                do {
+                    displaySubSPL();
+                    displayCommand();
+                    choice = scanner.nextInt();
 
-                    case 2:
-                        gaussjordanElim();
-                        break;
+                    switch (choice) {
+                        case 1:
+                            gaussianElim();
+                            break;
 
-                    case 3:
-                        inverseEq();
-                        break;
+                        case 2:
+                            gaussjordanElim();
+                            break;
 
-                    case 4:
-                        cramer();
-                        break;
+                        case 3:
+                            inverseEq();
+                            break;
 
-                    default:
-                        System.out.println("Invalid Input");
-                        break;
+                        case 4:
+                            cramer();
+                            break;
 
-                }
+                        default:
+                            System.out.println("Invalid Input");
+                            break;
+
+                    }
+                }while(choice!=9);
 
             }
 
@@ -215,8 +218,7 @@ public class MainProgram {
 
             do {
                 displaySubDet();
-                Scanner sc = new Scanner(System.in);
-                c = sc.nextInt();
+                c = scanner.nextInt();
                 if (c == 1) { // Metode determinan cara 1
                     detMetode1();
                 } else if (c == 2) { // Metode determinan cara 2
@@ -230,110 +232,232 @@ public class MainProgram {
             int input = 0;
             do {
                 displayInputType();
+                input = scanner.nextInt();
                 if (input == 1) {
                     // Input matriks dengan keyboard
+                    break;
                 } else if (input == 2) {
                     // Input matriks dengan file
+                    break;
                 } else {
                     System.out.println("Invalid input");
+                    break;
                 }
             }while(input != 1 && input != 2);
         }
         public static void detMetode2(){
             int input = 0;
-            displayInputType();
-            if(input == 1){
-                // Input matriks dengan keyboard
-            }else if (input == 2) {
-                // Input matriks dengan file
-            }else{
-                System.out.println("Invalid input");
-            }
+            do {
+                displayInputType();
+                input = scanner.nextInt();
+                if (input == 1) {
+                    // Input matriks dengan keyboard
+                    break;
+                } else if (input == 2) {
+                    // Input matriks dengan file
+                    break;
+                } else {
+                    System.out.println("Invalid input");
+                    break;
+                }
+            }while(input != 1 && input != 2);
         }
         /** PROSEDUR INVERSE MATRIKS **/
         public static void inverse(){
             int c;
-
-            displaySubInverse();
-            Scanner sc = new Scanner(System.in);
-            c = sc.nextInt();
-            if(c==1){
-                invMetode1();
-            }else if (c==2) {
-                invMetode2();
-            }else{
-                System.out.println("Invalid input");
-            }
+            do {
+                displaySubInverse();
+                c = scanner.nextInt();
+                if (c == 1) { // Metode determinan cara 1
+                    invMetode1();
+                } else if (c == 2) { // Metode determinan cara 2
+                    invMetode2();
+                } else { // Metode tidak dikenali
+                    System.out.println("Invalid input");
+                }
+            }while(c!=9);
         }
         public static void invMetode1(){
-
+            int input = 0;
+            do {
+                displayInputType();
+                input = scanner.nextInt();
+                if (input == 1) {
+                    // Input matriks dengan keyboard
+                    break;
+                } else if (input == 2) {
+                    // Input matriks dengan file
+                    break;
+                } else {
+                    System.out.println("Invalid input");
+                    break;
+                }
+            }while(input != 1 && input != 2);
         }
         public static void invMetode2(){
-
+            int input = 0;
+            do {
+                displayInputType();
+                input = scanner.nextInt();
+                if (input == 1) {
+                    // Input matriks dengan keyboard
+                    break;
+                } else if (input == 2) {
+                    // Input matriks dengan file
+                    break;
+                } else {
+                    System.out.println("Invalid input");
+                    break;
+                }
+            }while(input != 1 && input != 2);
         }
 
         /** PROSEDUR INTERPOLASI POLINOM **/
         public static void polInter(){
             int c;
-
-            displaySubInterpol();
-            Scanner sc = new Scanner(System.in);
-            c = sc.nextInt();
-            if(c==1){
-                polMetode1();
-            }else if (c==2) {
-                polMetode2();
-            }else{
-                System.out.println("Invalid input");
-            }
+            do {
+                displaySubInterpol();
+                c = scanner.nextInt();
+                if (c == 1) { // Metode determinan cara 1
+                    polMetode1();
+                } else if (c == 2) { // Metode determinan cara 2
+                    polMetode2();
+                } else { // Metode tidak dikenali
+                    System.out.println("Invalid input");
+                }
+            }while(c!=9);
         }
         public static void polMetode1(){
-
+            int input = 0;
+            do {
+                displayInputType();
+                input = scanner.nextInt();
+                if (input == 1) {
+                    // Input matriks dengan keyboard
+                    break;
+                } else if (input == 2) {
+                    // Input matriks dengan file
+                    break;
+                } else {
+                    System.out.println("Invalid input");
+                    break;
+                }
+            }while(input != 1 && input != 2);
         }
         public static void polMetode2(){
-
+            int input = 0;
+            do {
+                displayInputType();
+                input = scanner.nextInt();
+                if (input == 1) {
+                    // Input matriks dengan keyboard
+                    break;
+                } else if (input == 2) {
+                    // Input matriks dengan file
+                    break;
+                } else {
+                    System.out.println("Invalid input");
+                    break;
+                }
+            }while(input != 1 && input != 2);
         }
         /** PROSEDUR INTERPOLASI BICUBIC **/
         public static void cubInter(){
             int c;
-
-            displaySubBicubic();
-            Scanner sc = new Scanner(System.in);
-            c = sc.nextInt();
-            if(c==1){
-                bicMetode1();
-            }else if (c==2) {
-                bicMetode2();
-            }else{
-                System.out.println("Invalid input");
-            }
+            do {
+                displaySubBicubic();
+                c = scanner.nextInt();
+                if (c == 1) { // Metode determinan cara 1
+                    bicMetode1();
+                } else if (c == 2) { // Metode determinan cara 2
+                    bicMetode2();
+                } else { // Metode tidak dikenali
+                    System.out.println("Invalid input");
+                }
+            }while(c!=9);
         }
         public static void bicMetode1(){
-
+            int input = 0;
+            do {
+                displayInputType();
+                input = scanner.nextInt();
+                if (input == 1) {
+                    // Input matriks dengan keyboard
+                    break;
+                } else if (input == 2) {
+                    // Input matriks dengan file
+                    break;
+                } else {
+                    System.out.println("Invalid input");
+                    break;
+                }
+            }while(input != 1 && input != 2);
         }
         public static void bicMetode2(){
-
+            int input = 0;
+            do {
+                displayInputType();
+                input = scanner.nextInt();
+                if (input == 1) {
+                    // Input matriks dengan keyboard
+                    break;
+                } else if (input == 2) {
+                    // Input matriks dengan file
+                    break;
+                } else {
+                    System.out.println("Invalid input");
+                    break;
+                }
+            }while(input != 1 && input != 2);
         }
         /** PROSEDUR REGRESI LINEAR BERGANDA **/
         public static void regression(){
             int c;
-
-            displaySubRegression();
-            Scanner sc = new Scanner(System.in);
-            c = sc.nextInt();
-            if(c==1){
-                regMetode1();
-            }else if (c==2) {
-                regMetode2();
-            }else{
-                System.out.println("Invalid input");
-            }
+            do {
+                displaySubRegression();
+                c = scanner.nextInt();
+                if (c == 1) { // Metode determinan cara 1
+                    regMetode1();
+                } else if (c == 2) { // Metode determinan cara 2
+                    regMetode2();
+                } else { // Metode tidak dikenali
+                    System.out.println("Invalid input");
+                }
+            }while(c!=9);
         }
         public static void regMetode1(){
-
+            int input = 0;
+            do {
+                displayInputType();
+                input = scanner.nextInt();
+                if (input == 1) {
+                    // Input matriks dengan keyboard
+                    break;
+                } else if (input == 2) {
+                    // Input matriks dengan file
+                    break;
+                } else {
+                    System.out.println("Invalid input");
+                    break;
+                }
+            }while(input != 1 && input != 2);
         }
         public static void regMetode2(){
-
+            int input = 0;
+            do {
+                displayInputType();
+                input = scanner.nextInt();
+                if (input == 1) {
+                    // Input matriks dengan keyboard
+                    break;
+                } else if (input == 2) {
+                    // Input matriks dengan file
+                    break;
+                } else {
+                    System.out.println("Invalid input");
+                    break;
+                }
+            }while(input != 1 && input != 2);
         }
 
 }
