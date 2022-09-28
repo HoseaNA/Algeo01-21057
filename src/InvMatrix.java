@@ -39,65 +39,6 @@ public class InvMatrix {
         }
     }
 
-    // public static double[][] RowEchelonSym(double[][] Matrix) {
-    // // I.S : menerima sebuah matrix input dan sebuah array solusi tiap persamaan
-    // // F.S : Membentuk sebuah matriks eselon baris dari matrix input
-    // int N = Matrix.length;
-    // for (int k = 0; k < N; k++) {
-    // /** find pivot row **/
-    // int max = k;
-    // for (int i = k + 1; i < N; i++)
-    // if (Math.abs(Matrix[i][k]) > Math.abs(Matrix[max][k]))
-    // max = i;
-
-    // /** swap row in A matrix **/
-    // double[] temp = Matrix[k];
-    // Matrix[k] = Matrix[max];
-    // Matrix[max] = temp;
-
-    // /** pivot within A and B **/
-    // for (int i = k + 1; i < N; i++) {
-    // double factor = Matrix[i][k] / Matrix[k][k];
-    // for (int j = k; j < N; j++) {
-    // Matrix[i][j] -= factor * Matrix[k][j];
-    // }
-    // }
-    // /** Divide each row by its leading one-to-be **/
-    // double div;
-    // for (int i = k; i < N; i++) {
-    // for (int j = N - 1; j >= k; j--) {
-    // div = Matrix[i][i];
-    // Matrix[i][j] = Matrix[i][j] / div;
-    // }
-    // }
-    // }
-    // return Matrix;
-    // }
-
-    // public static double[][] ReducedRowEchelonSym(double[][] Matrix) {
-    // // I.S : Menerima sebuah Matriks yang sudah berbentuk eselon baris
-    // // F.S : Mengubah matriks eselon baris menjadi eselon baris tereduksi
-    // double div;
-    // boolean leadingToBe;
-
-    // for (int i = 0; i < Matrix.length; i++) {
-    // for (int j = i + 1; j < Matrix[0].length; j++) {
-    // div = 1;
-    // leadingToBe = true;
-    // for (int k = 0; k < Matrix[0].length; k++) {
-    // if (leadingToBe && Matrix[j][k] != 0) {
-    // div = Matrix[i][k] / Matrix[j][k];
-    // Matrix[i][k] -= div * Matrix[j][k];
-    // leadingToBe = false;
-    // } else if ((!leadingToBe)) {
-    // Matrix[i][k] -= div * Matrix[j][k];
-    // }
-    // }
-    // }
-    // }
-    // return Matrix;
-    // }
-
     public static double[][] ReadMatriksSym() {
         Scanner in = new Scanner(System.in);
 
