@@ -32,7 +32,7 @@ public class MATRIKS {
         this.ColEff = N;
     }
 
-    public double getElmt(int baris, int kolom) {
+    public double getElmt(MATRIKS M, int baris, int kolom) {
         return this.Mat[baris][kolom];
     }
 
@@ -61,53 +61,46 @@ public class MATRIKS {
         scanner.close();
     }
 
-    public void readMatrixFile(String path)
-    {
+    public void readMatrixFile(String path) {
         this.RowEff = 0;
         this.ColEff = 0;
-        //membaca size matrix dari file
+        // membaca size matrix dari file
         try {
             File file = new File(path);
             Scanner reader = new Scanner(file);
             int i = 0;
-            while (reader.hasNextLine())
-            {
-                this.RowEff+=1;
+            while (reader.hasNextLine()) {
+                this.RowEff += 1;
                 Scanner colReader = new Scanner(reader.nextLine());
-                while(colReader.hasNextDouble())
-                {
-                    if (i == 0){this.ColEff+=1;}
+                while (colReader.hasNextDouble()) {
+                    if (i == 0) {
+                        this.ColEff += 1;
+                    }
                     colReader.nextDouble();
                 }
                 i += 1;
             }
             reader.close();
-        }
-        catch (FileNotFoundException e)
-        {
+        } catch (FileNotFoundException e) {
             System.out.println("File not found.");
             e.printStackTrace();
         }
 
-        //isi matrix
+        // isi matrix
         this.Mat = new double[this.RowEff][this.ColEff];
         File file = new File("..\\test\\matrix.txt");
-        try{
+        try {
             Scanner rowReader = new Scanner(file);
-            for (int i = 0 ; i<this.RowEff ; i++)
-            {
+            for (int i = 0; i < this.RowEff; i++) {
                 Scanner colReader = new Scanner(rowReader.nextLine());
-                for (int j = 0 ; j<this.ColEff ; j++)
-                {
+                for (int j = 0; j < this.ColEff; j++) {
                     double data = colReader.nextDouble();
                     this.Mat[i][j] = data;
                 }
                 colReader.close();
             }
             rowReader.close();
-        }
-        catch (FileNotFoundException e)
-        {
+        } catch (FileNotFoundException e) {
             System.out.println("File not found.");
             e.printStackTrace();
         }
@@ -134,27 +127,6 @@ public class MATRIKS {
         }
         return ColZero;
     }
-
-    // public static double det(double[][] mat) {
-    // int Row = mat.length;
-    // double det = 0;
-    // double lowerDet;
-
-    // if (Row == 1) {
-    // det = mat[0][0];
-    // } else {
-    // for (int i = 0; i < Row; i++) {
-    // int c = 1;
-    // if (i % 2 == 1) {
-    // c = -1;
-    // }
-    // lowerDet = det(oneLower(mat, 1, i + 1));
-
-    // det += c * mat[0][i] * lowerDet;
-    // }
-    // }
-    // return det;
-    // }
 
     public static double[][] minor(double[][] mat, int Row, int Col) {
         int size = mat.length;
@@ -190,7 +162,7 @@ public class MATRIKS {
                         c = -1;
                     }
                     lowerDet = OBE.detOBE(minor(Mat, i, j));
-                   
+
                     cofMat[i][j] = c * lowerDet;
                 }
             }
@@ -222,13 +194,140 @@ public class MATRIKS {
         return multipliedMat;
     }
 
-    public static double [][] CopyMatrix(double [][] mat){
-        double [] [] mCopy = new double [mat.length][mat[0].length];
-        for(int i =0; i<mat.length;i++){
-            for(int j =0 ; j<mat[0].length;j++){
+    public static double[][] CopyMatrix(double[][] mat) {
+        double[][] mCopy = new double[mat.length][mat[0].length];
+        for (int i = 0; i < mat.length; i++) {
+            for (int j = 0; j < mat[0].length; j++) {
                 mCopy[i][j] = mat[i][j];
             }
         }
         return mCopy;
     }
+
+    /*** Fungsi Pengubah Bentuk Matriks ***/
+    public static void reducedRE(double[][] M) {
+        // I.S : Menerima matriks M yang berbentuk rowEchelon
+        // I.S : Membentuk matriks eselon baris tereduksi dari matriks M
+
+        for (int i = M.length - 1; i > 0; i--) {
+            boolean stop = false;
+            int j = 0;
+            double div;
+            while (!stop && j < M[0].length) {
+                if (M[i][j] == 1) {
+                    // loop baris indeks k dan i untuk mencari div
+                    for (int k = i - 1; k >= 0; k--) {
+                        div = (M[k][j] / M[i][j]);
+                        for (int l = M[0].length - 1; l >= 0; l--) {
+                            M[k][l] -= M[i][l] * div;
+                        }
+                    }
+                    // Jika terpenuhi stop loop
+                    stop = true;
+                }
+                j++;
+            }
+        }
+    }
+
+    public static void rowEchelon(double[][] M) {
+        /*
+         * I.S Menerima Matriks M yang telah terisi
+         * /* F.S Mengubah matriks M menjadi bentuk Row Echelon
+         */
+
+        // KAMUS LOKAL
+        double ratio;
+        double temp;
+
+        int i, j, k, l;
+
+        // ALGORITMA
+
+        // Loop setiap baris
+        for (i = 0; i < M.length; i++) {
+            // Membuat leading one dari leading element
+            boolean leadElmt;
+
+            for (k = 0; k < M.length; k++) {
+                ratio = 1;
+                leadElmt = true;
+                for (j = 0; j < M[0].length; j++) {
+                    if (leadElmt && M[k][j] != 0) {
+                        ratio = 1 / M[k][j];
+                        M[k][j] *= ratio;
+                        leadElmt = false;
+                    } else if (!leadElmt && M[k][j] != 0) {
+                        M[k][j] *= ratio;
+                    }
+                }
+            }
+
+            // Mengubah semua elemen dibawah leading one menjadi nol
+            for (int row = i + 1; row < M.length; row++) {
+                if (M[i][leadElmtIndex(i, M)] != 0) {
+                    ratio = M[row][leadElmtIndex(i, M)] / M[i][leadElmtIndex(i, M)]; // ratio untuk pengali
+                    for (int col = 0; col < M[0].length; col++) {
+                        M[row][col] -= ratio * (M[i][col]);
+                    }
+                }
+            }
+
+            // Membentuk matriks segitiga atas dengan menukar baris
+            for (k = 0; k < M.length - 1; k++) {
+                // Mencari jumlah nol di baris ke-i
+                int Nzero;
+                Nzero = 0;
+                j = 0;
+                while (j < M[0].length - 1 && M[k][j] == 0) {
+                    Nzero++;
+                    j++;
+                }
+                // Mencari jumlah nol di baris setelah baris ke-i
+                int RowToSwitch, zeroRowSw;
+                RowToSwitch = -1;
+                zeroRowSw = Nzero;
+                for (int k1 = k + 1; k1 < M.length; k1++) {
+                    int NzeroX;
+                    NzeroX = 0;
+                    l = 0;
+                    while (l < M[0].length - 1 && M[k1][l] == 0) {
+                        NzeroX++;
+                        l++;
+                    }
+                    if (NzeroX < zeroRowSw) {
+                        RowToSwitch = k1;
+                        zeroRowSw = NzeroX;
+                    }
+                }
+                // Menukar 2 baris
+                if (RowToSwitch != -1) {
+
+                    for (int m = 0; m < M[0].length; m++) {
+                        temp = M[k][m];
+                        M[k][m] = M[RowToSwitch][m];
+                        M[RowToSwitch][m] = temp;
+                    }
+                }
+            }
+        }
+    }
+
+    public static int leadElmtIndex(int i, double[][] M) {
+        // I.S Mengecek Matriks M baris indeks ke-i, Matriks M berbentuk
+        // rowEchelon/ReducedRE
+        // F.S Posisi dari leadingElement baris ke-i
+
+        int j = 0;
+        while (j < M[0].length - 1) {
+            // Mencari leading Element
+            if (M[i][j] != 0) {
+                break;
+            } else {
+                j++;
+            }
+        }
+        return j;
+    }
+    //
 }

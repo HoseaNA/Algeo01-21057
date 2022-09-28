@@ -77,7 +77,9 @@ public class InvMatrix {
                 }
             }
         }
-        newMat = MATRIKS.GaussJordan(extMat);
+        MATRIKS.rowEchelon(extMat);
+        MATRIKS.reducedRE(extMat);
+        newMat = extMat;
 
         for (int i = 0; i < invMat.length; i++) {
             for (int j = 0; j < invMat[0].length; j++) {
@@ -89,7 +91,7 @@ public class InvMatrix {
     }
 
     public static double[][] InvCofactor(double[][] mat) {
-        double[][] copyMat = MATRIKS.CopyMatrix(mat) ;
+        double[][] copyMat = MATRIKS.CopyMatrix(mat);
         double det = OBE.detOBE(copyMat);
         double[][] matCofactor = MATRIKS.Cofactor(mat);
         double[][] adjMat = MATRIKS.transpose(matCofactor);
