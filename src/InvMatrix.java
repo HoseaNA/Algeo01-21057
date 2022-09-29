@@ -1,30 +1,22 @@
 import java.util.*;
 
 public class InvMatrix {
-    public static void InvStart() {
-        System.out.println("Menu Invers Matriks :");
-        System.out.println("1. Metode Gauss Jordan");
-        System.out.println("2. Metode Kofaktor");
-        System.out.println("\n");
+    public static void InvStartMethod1() {
+        double[][] Mat = ReadMatriksSym();
+        double[][] InvMat = new double[Mat.length][Mat[0].length];
 
-        System.out.println("Tentukan pilihan anda :");
-        Scanner in = new Scanner(System.in);
-        int pilihan = in.nextInt();
-        if (pilihan == 1) {
-            double[][] Mat = ReadMatriksSym();
-            double[][] InvMat = new double[Mat.length][Mat[0].length];
+        InvMat = InvGaussJordan(Mat);
+        System.out.println("Hasil invers adalah :");
+        printMatriks(InvMat);
+    }
 
-            InvMat = InvGaussJordan(Mat);
-            System.out.println("Hasil invers adalah :");
-            printMatriks(InvMat);
-        } else if (pilihan == 2) {
-            double[][] Mat = ReadMatriksSym();
-            double[][] InvMat = new double[Mat.length][Mat[0].length];
-            InvMat = InvCofactor(Mat);
-            System.out.println("Hasil invers adalah :");
-            printMatriks(InvMat);
-        }
-        in.close();
+    public static void InvStartMethod2() {
+        double[][] Mat = ReadMatriksSym();
+        double[][] InvMat = new double[Mat.length][Mat[0].length];
+        
+        InvMat = InvCofactor(Mat);
+        System.out.println("Hasil invers adalah :");
+        printMatriks(InvMat);
     }
 
     public static void printMatriks(double[][] Mat) {

@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class MainProgram {
+public class Main {
     // KAMUS GLOBAL
     boolean exit = false;
     static boolean backToMain = false;
@@ -100,7 +100,7 @@ public class MainProgram {
 
                 case 4:
                     // Menu interpolasi polinom
-                    polInter();
+                    InterPol.InterpolPolaStart();
                     break;
 
                 case 5:
@@ -284,6 +284,7 @@ public class MainProgram {
                 input = scanner.nextInt();
                 if (input == 1) {
                     // Input matriks dengan keyboard
+                    InvMatrix.InvStartMethod1();
                     break;
                 } else if (input == 2) {
                     // Input matriks dengan file
@@ -301,6 +302,7 @@ public class MainProgram {
                 input = scanner.nextInt();
                 if (input == 1) {
                     // Input matriks dengan keyboard
+                    InvMatrix.InvStartMethod2();
                     break;
                 } else if (input == 2) {
                     // Input matriks dengan file
@@ -312,55 +314,6 @@ public class MainProgram {
             }while(input != 1 && input != 2);
         }
 
-        /** PROSEDUR INTERPOLASI POLINOM **/
-        public static void polInter(){
-            int c;
-            do {
-                displaySubInterpol();
-                c = scanner.nextInt();
-                if (c == 1) { // Metode determinan cara 1
-                    polMetode1();
-                } else if (c == 2) { // Metode determinan cara 2
-                    polMetode2();
-                } else { // Metode tidak dikenali
-                    System.out.println("Invalid input");
-                }
-            }while(c!=9);
-        }
-        public static void polMetode1(){
-            int input = 0;
-            do {
-                displayInputType();
-                input = scanner.nextInt();
-                if (input == 1) {
-                    // Input matriks dengan keyboard
-                    break;
-                } else if (input == 2) {
-                    // Input matriks dengan file
-                    break;
-                } else {
-                    System.out.println("Invalid input");
-                    break;
-                }
-            }while(input != 1 && input != 2);
-        }
-        public static void polMetode2(){
-            int input = 0;
-            do {
-                displayInputType();
-                input = scanner.nextInt();
-                if (input == 1) {
-                    // Input matriks dengan keyboard
-                    break;
-                } else if (input == 2) {
-                    // Input matriks dengan file
-                    break;
-                } else {
-                    System.out.println("Invalid input");
-                    break;
-                }
-            }while(input != 1 && input != 2);
-        }
         /** PROSEDUR INTERPOLASI BICUBIC **/
         public static void cubInter(){
             int c;
