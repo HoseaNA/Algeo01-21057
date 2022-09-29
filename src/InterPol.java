@@ -8,37 +8,22 @@ public class InterPol {
         System.out.println("Masukkan titik terakhir (n) :");
         int n = in.nextInt();
 
-        double[] X = new double[n + 1];
-        double[] Y = new double[n + 1];
-        double[] Result = SolvedFunctInterPol(X, Y, n);
+        double[][] X = new double[n+1][2];
+        double[] Result = SolvedFunctInterPol(X, n);
 
         System.out.println(" ");
         System.out.println("Masukkan nilai X :");
         double X1 = in.nextDouble();
         EstimateInterPol(Result, X1);
-        boolean Repeat = true;
-        while (Repeat) {
-            System.out.println(" ");
-            System.out.print("Exit?\n(1. Yes, 2. No)\n");
-            int Exit = in.nextInt();
-            if (Exit == 1) {
-                Repeat = false;
-            } else {
-                System.out.println("Masukkan nilai X :");
-                X1 = in.nextDouble();
-                EstimateInterPol(Result, X1);
-            }
-        }
 
         in.close();
     }
 
-    public static double[] SolvedFunctInterPol(double[] X, double[] Y, int n) {
-        ReadPoint(X, Y, n);
+    public static double[] SolvedFunctInterPol(double[][] X, int n) {
+        ReadPoint(X, n);
         System.out.println(" ");
         double[][] MatXSym = CreateMatInterPol(X);
-        double[][] MatInterPol = MergeMatWithArr(MatXSym, Y);
-        double[] Result = SPLResult(MatInterPol);
+        double[] Result = SPLResult(MatXSym);
         printFunct(Result);
         return Result;
     }
@@ -53,39 +38,26 @@ public class InterPol {
         System.out.printf("Hasil taksiran fungsi f(%.1f) = %.4f", X, Estimated);
     }
 
-    public static void ReadPoint(double[] X, double[] Y, int n) {
+    public static void ReadPoint(double[][] X, int n) {
         for (int i = 0; i <= n; i++) {
             System.out.println("Masukkan titik X" + (i));
-            X[i] = in.nextDouble();
+            X[i][0] = in.nextDouble();
             System.out.println("Masukkan titik Y" + (i));
-            Y[i] = in.nextDouble();
+            X[i][1] = in.nextDouble();
         }
     }
 
-    public static double[][] CreateMatInterPol(double[] X) {
+    public static double[][] CreateMatInterPol(double[][] X) {
         int n = X.length;
-        double[][] Mat = new double[n][n];
+        double[][] Mat = new double[n][n+1];
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                Mat[i][j] = Math.pow((X[i]), j);
+                Mat[i][j] = Math.pow((X[i][0]), j);
             }
+            Mat[i][Mat[0].length-1] = X[i][1];
         }
         return Mat;
-    }
-
-    public static double[][] MergeMatWithArr(double[][] Mat, double[] Y) {
-        double[][] NewMat = new double[Mat.length][Mat[0].length + 1];
-
-        for (int i = 0; i < Mat.length; i++) {
-            for (int j = 0; j < Mat[0].length; j++) {
-                NewMat[i][j] = Mat[i][j];
-                if (j == Mat[0].length - 1) {
-                    NewMat[i][j + 1] = Y[i];
-                }
-            }
-        }
-        return NewMat;
     }
 
     public static double[] SPLResult(double[][] Mat) {

@@ -168,7 +168,7 @@ public class Gauss {
             int j = 0;
             double div;
             while (!stop && j < M.ColEff) {
-                if (MATRIKS.getElmt(M, i, j) == 1) {
+                if (M.Mat[i][j] == 1) {
                     // loop baris indeks k dan i untuk mencari div
                     for (int k = i - 1; k >= 0; k--) {
                         div = (M.Mat[k][j] / M.Mat[i][j]);
