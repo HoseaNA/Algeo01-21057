@@ -36,7 +36,7 @@ public class MATRIKS {
         return this.Mat[baris][kolom];
     }
 
-    public static void readMatrix(MATRIKS Matrix, ARRAY Array) {
+    public static void readMatrix(MATRIKS Matrix) {
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("\nEnter number of rows");
@@ -47,18 +47,15 @@ public class MATRIKS {
         Matrix.setRow(N);
         Matrix.setCol(M);
 
+
         /** Read inputs to set number of variables and equations **/
         for (int i = 0; i < N; i++) {
             System.out.println("\nEnter equations coefficients of row " + (i + 1));
             for (int j = 0; j < M; j++)
                 Matrix.Mat[i][j] = scanner.nextDouble();
         }
-        /** Solutions for each row of equation **/
-        for (int i = 0; i < N; i++) {
-            System.out.println("\nEnter solutions for equation " + (i + 1));
-            Array.Arr[i] = scanner.nextDouble();
-        }
-        scanner.close();
+
+
     }
 
     public void readMatrixFile(String path) {
@@ -107,12 +104,13 @@ public class MATRIKS {
 
     }
 
-    public static void printMatrix(MATRIKS Matrix, ARRAY Array) {
+    public static void printMatrix(MATRIKS Matrix)
+    {
 
         for (int i = 0; i < Matrix.RowEff; i++) {
             for (int j = 0; j < Matrix.ColEff; j++)
                 System.out.printf("%.2f ", Matrix.Mat[i][j]);
-            System.out.printf("| %.2f\n", Array.Arr[i]);
+            System.out.println();
         }
         System.out.println();
     }
