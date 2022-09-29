@@ -19,7 +19,7 @@ public class InvMatrix {
         printMatriks(InvMat);
     }
 
-    public static void printMatriks(double[][] Mat) {
+    public static void printMatriks(double[][] Mat){
         int Row = Mat.length;
         int Col = Mat[0].length;
 
