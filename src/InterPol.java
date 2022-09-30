@@ -8,7 +8,7 @@ public class InterPol {
         System.out.println("Masukkan titik terakhir (n) :");
         int n = in.nextInt();
 
-        double[][] X = new double[n+1][2];
+        double[][] X = new double[n + 1][2];
         double[] Result = SolvedFunctInterPol(X, n);
 
         System.out.println(" ");
@@ -35,7 +35,7 @@ public class InterPol {
         for (int i = 0; i < Result.length; i++) {
             Estimated += Result[i] * (Math.pow(X, i));
         }
-        System.out.printf("Hasil taksiran fungsi f(%.1f) = %.4f", X, Estimated);
+        System.out.printf("Hasil taksiran fungsi f(%.3f) = %.4f\n", X, Estimated);
     }
 
     public static void ReadPoint(double[][] X, int n) {
@@ -49,13 +49,13 @@ public class InterPol {
 
     public static double[][] CreateMatInterPol(double[][] X) {
         int n = X.length;
-        double[][] Mat = new double[n][n+1];
+        double[][] Mat = new double[n][n + 1];
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 Mat[i][j] = Math.pow((X[i][0]), j);
             }
-            Mat[i][Mat[0].length-1] = X[i][1];
+            Mat[i][Mat[0].length - 1] = X[i][1];
         }
         return Mat;
     }
