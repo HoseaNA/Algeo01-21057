@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 import static SPL.bicubicInt.M;
@@ -13,7 +14,12 @@ public class Main {
     static Scanner scanner = new Scanner(System.in);
     static final int rowCap = 100;
     static final int colcap = 100;
+<<<<<<< Updated upstream
     public static void main(String[] args) {
+=======
+
+    public static void main(String[] args) throws IOException {
+>>>>>>> Stashed changes
 
 
         Scanner scanner = new Scanner(System.in);
@@ -157,6 +163,49 @@ public class Main {
                     break;
             }
 
+<<<<<<< Updated upstream
+=======
+    // Prosedur untuk memilih menu selanjutnya
+    public static void optionBranch(int option) throws IOException {
+        switch (option) {
+            case 1:
+                // Menu SPL
+                SPL();
+                break;
+
+            case 2:
+                // Menu determinan
+                determinant();
+                break;
+
+            case 3:
+                // Menu inverse
+                inverse();
+                break;
+
+            case 4:
+                // Menu interpolasi polinom
+                polInter();
+                break;
+
+            case 5:
+                // Menu interpolasi bicubic
+                cubInter();
+                break;
+
+            case 6:
+                // Menu regresi linear berganda
+                regression();
+                break;
+
+            case 7:
+                // Menu pilihan exit
+                break;
+
+            default:
+                System.out.println("Option is invalid!! Please enter the right option");
+                break;
+>>>>>>> Stashed changes
         }
         /*** PROSEDUR EKSEKUSI PILIHAN ***/
         /** Setiap prosedur dari pilihan main menu beserta submenu dan prosesnya **/
@@ -369,6 +418,7 @@ public class Main {
         /** PROSEDUR INVERSE MATRIKS **/
         public static void inverse(){
 
+<<<<<<< Updated upstream
             do {
                 displaySubInverse();
                 c = scanner.nextInt();
@@ -448,6 +498,32 @@ public class Main {
                 }
             }while(input != 1 && input != 2);
         }
+=======
+    /**
+     * PROSEDUR INTERPOLASI POLINOM
+     * 
+     * @throws IOException
+     **/
+    public static void polInter() throws IOException {
+        int input = 0;
+        do {
+            displayInputType();
+            input = scanner.nextInt();
+            if (input == 1) {
+                // Input matriks dengan keyboard
+                InterPol.InterPolaStart1();
+                break;
+            } else if (input == 2) {
+                // Input matriks dengan file
+                InterPol.InterPolaStart2();
+                break;
+            } else {
+                System.out.println("Invalid input");
+                break;
+            }
+        } while (input != 1 && input != 2);
+    }
+>>>>>>> Stashed changes
 
         /** PROSEDUR INTERPOLASI POLINOM **/
         public static void polInter(){

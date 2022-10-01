@@ -1,15 +1,16 @@
 import java.util.*;
+import java.io.IOException;
 import java.math.*;
 
 public class InterPol {
     static Scanner in = new Scanner(System.in);
 
-    public static void InterpolPolaStart() {
+    public static void InterPolaStart1() {
         System.out.println("Masukkan titik terakhir (n) :");
         int n = in.nextInt();
 
         double[][] X = new double[n + 1][2];
-        double[] Result = SolvedFunctInterPol(X, n);
+        double[] Result = SolvedFunctInterPol1(X, n);
 
         System.out.println(" ");
         System.out.println("Masukkan nilai X :");
@@ -19,8 +20,30 @@ public class InterPol {
         in.close();
     }
 
-    public static double[] SolvedFunctInterPol(double[][] X, int n) {
+    public static void InterPolaStart2() throws IOException {
+        double[] Result = SolvedFunctInterPol2();
+
+        System.out.println(" ");
+        System.out.println("Masukkan nilai X :");
+        double X1 = in.nextDouble();
+        EstimateInterPol(Result, X1);
+
+        in.close();
+    }
+
+    public static double[] SolvedFunctInterPol1(double[][] X, int n) {
         ReadPoint(X, n);
+        System.out.println(" ");
+        double[][] MatXSym = CreateMatInterPol(X);
+        double[] Result = SPLResult(MatXSym);
+        printFunct(Result);
+        return Result;
+    }
+
+    public static double[] SolvedFunctInterPol2() {
+        System.out.println("Masukkan nama file :");
+        String FileName = in.next();
+        double[][] X = MATRIKS.readMatFile(FileName);
         System.out.println(" ");
         double[][] MatXSym = CreateMatInterPol(X);
         double[] Result = SPLResult(MatXSym);

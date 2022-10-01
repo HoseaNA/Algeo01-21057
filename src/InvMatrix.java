@@ -13,13 +13,13 @@ public class InvMatrix {
     public static void InvStartMethod2() {
         double[][] Mat = ReadMatriksSym();
         double[][] InvMat = new double[Mat.length][Mat[0].length];
-        
+
         InvMat = InvCofactor(Mat);
         System.out.println("Hasil invers adalah :");
         printMatriks(InvMat);
     }
 
-    public static void printMatriks(double[][] Mat){
+    public static void printMatriks(double[][] Mat) {
         int Row = Mat.length;
         int Col = Mat[0].length;
 

@@ -52,14 +52,12 @@ public class MATRIKS {
         Matrix.setRow(N);
         Matrix.setCol(M);
 
-
         /** Read inputs to set number of variables and equations **/
         for (int i = 0; i < N; i++) {
             System.out.println("\nEnter equations coefficients of row " + (i + 1));
             for (int j = 0; j < M; j++)
                 Matrix.Mat[i][j] = scanner.nextDouble();
         }
-
 
     }
 
@@ -107,8 +105,7 @@ public class MATRIKS {
         }
     }
 
-    public static void printMatrix(MATRIKS Matrix)
-    {
+    public static void printMatrix(MATRIKS Matrix) {
 
         for (int i = 0; i < Matrix.RowEff; i++) {
             for (int j = 0; j < Matrix.ColEff; j++)
@@ -329,6 +326,52 @@ public class MATRIKS {
             }
         }
         return j;
+    }
+
+    public static double[][] readMatFile(String FileName) {
+        int Row = 0;
+        int Col = 0;
+        // membaca size matrix dari file
+        try {
+            File file = new File("../Algeo01-21057/test/" + FileName);
+            Scanner reader = new Scanner(file);
+            int i = 0;
+            while (reader.hasNextLine()) {
+                Row += 1;
+                Scanner colReader = new Scanner(reader.nextLine());
+                while (colReader.hasNextDouble()) {
+                    if (i == 0) {
+                        Col += 1;
+                    }
+                    colReader.nextDouble();
+                }
+                i += 1;
+            }
+            reader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found.");
+            e.printStackTrace();
+        }
+
+        // isi matrix
+        double[][] Mat = new double[Row][Col];
+        File file = new File("../Algeo01-21057/test/" + FileName);
+        try {
+            Scanner rowReader = new Scanner(file);
+            for (int i = 0; i < Row; i++) {
+                Scanner colReader = new Scanner(rowReader.nextLine());
+                for (int j = 0; j < Col; j++) {
+                    double data = colReader.nextDouble();
+                    Mat[i][j] = data;
+                }
+                colReader.close();
+            }
+            rowReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found.");
+            e.printStackTrace();
+        }
+        return Mat;
     }
     //
 }
