@@ -13,7 +13,7 @@ public class InvMatrix {
             MATRIKS.printMatriks(InvMat);
             displaySavePromptInverse(InvMat);
         } else {
-            System.out.println("Please enter input file (.txt)");
+            System.out.println("Masukkan nama file (.txt)");
             Scanner in = new Scanner(System.in);
             String filename = in.nextLine();
             double[][] Mat = MATRIKS.readMatFile(filename);
@@ -37,7 +37,7 @@ public class InvMatrix {
             MATRIKS.printMatriks(InvMat);
             displaySavePromptInverse(InvMat);
         } else {
-            System.out.println("Please enter input file (.txt)");
+            System.out.println("Masukkan nama file (.txt)");
             Scanner in = new Scanner(System.in);
             String filename = in.nextLine();
             double[][] Mat = MATRIKS.readMatFile(filename);
@@ -60,7 +60,7 @@ public class InvMatrix {
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                System.out.println("\nEnter equations coefficients of row " + (i + 1) + " colom " + (j + 1));
+                System.out.println("\nMasukkan koefisien dari baris " + (i + 1) + " kolom " + (j + 1));
                 Mat[i][j] = in.nextDouble();
             }
         }
@@ -116,15 +116,15 @@ public class InvMatrix {
 
         String prompt;
         boolean back = false;
-        System.out.println("\nWould you like to save the result? (Y/N) ");
-        System.out.println("Enter Y to Save ");
-        System.out.println("Enter N to Quit\n");
+        System.out.println("\nApakah ingin menyimpan hasil? (Y/N) ");
+        System.out.println("Masukkan Y untuk Save ");
+        System.out.println("Masukkan N untuk Quit\n");
         Main.displayCommand();
         do {
             Scanner scanner = new Scanner(System.in);
             prompt = scanner.nextLine().toLowerCase();
             if (prompt.equals("y")) {
-                System.out.println("please enter file name (.txt)");
+                System.out.println("Masukkan nama file (.txt)");
                 String filename = scanner.nextLine();
                 // Algoritma save to file isi disini
                 writeFileInverse(filename, InvMat);
