@@ -1,5 +1,3 @@
-package SPL;
-
 import java.util.Scanner;
 
 public class bicubicInt {
@@ -20,18 +18,16 @@ public class bicubicInt {
     static MATRIKS finalCubic = new MATRIKS(16,17);
 
 
-    public static void bicubicInterpolation(){
-        // Masukkan nilai titik-titik yang akan diinterpolasi
-        inputPoints();
+    public static void bicubicInterpolation(MATRIKS M){
         // Prompt ke user untuk menginput titik yang dicari
         inputXY();
         // Mencari nilai dari f(x,y) dengan interpolasi bikubik
-        findCubicInter();
+        findCubicInter(M);
 
     }
 
-    public static void inputPoints(){
-
+    public static void inputPoints(MATRIKS M){
+        // Masukkan nilai titik-titik yang akan diinterpolasi
         for(i=0;i<4;++i){
             for(j=0;j<4;++j){
                 System.out.printf("Masukkan nilai dari f(%d,%d) : \n", (i-1),(j-1));
@@ -49,7 +45,7 @@ public class bicubicInt {
         y = scan.nextDouble();
     }
 
-    public static void findCubicInter(){
+    public static void findCubicInter(MATRIKS M){
         // Assign values
         for(i=0;i<4;++i){
             for(j=0;j<4;++j){
@@ -85,7 +81,7 @@ public class bicubicInt {
                 hasil += result.Mat[i][j] * Math.pow(x,i) * Math.pow(y,j);
             }
         }
-        System.out.printf("\nNilai dari f(%.3f,%.3f) adalah %.3f\n",x,y,hasil);
+        System.out.printf("\nNilai dari f(%.3f,%.3f) adalah %.3f\n", x,y,hasil);
     }
 }
 

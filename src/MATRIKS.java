@@ -3,17 +3,22 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class MATRIKS {
-    // Atribut
+    //Atribut
     double[][] Mat = new double[100][100];
     int RowEff;
     int ColEff;
 
-    // Method
+    //Method
 
-    // Konstruktor dengan input
+    //Konstruktor dengan input
     MATRIKS(int baris, int kolom) {
         this.RowEff = baris;
         this.ColEff = kolom;
+    }
+    // Konstruktor metode file
+    MATRIKS(String path){
+        readFileMatrix(path);
+
     }
 
     public int getRow() {
@@ -32,8 +37,8 @@ public class MATRIKS {
         this.ColEff = N;
     }
 
-    public double getElmt(MATRIKS M, int baris, int kolom) {
-        return this.Mat[baris][kolom];
+    public static double getElmt(MATRIKS M,int baris, int kolom){
+        return M.Mat[baris][kolom];
     }
 
     public static void readMatrix(MATRIKS Matrix) {
@@ -58,50 +63,48 @@ public class MATRIKS {
 
     }
 
-    public void readMatrixFile(String path) {
-        this.RowEff = 0;
-        this.ColEff = 0;
-        // membaca size matrix dari file
+    public void readFileMatrix(String path) {
+        // I.S : menerima file path dengan format file .txt
+        // F.S : membaca file .txt dan menyalin isi ke matriks
         try {
-            File file = new File(path);
-            Scanner reader = new Scanner(file);
-            int i = 0;
-            while (reader.hasNextLine()) {
-                this.RowEff += 1;
-                Scanner colReader = new Scanner(reader.nextLine());
-                while (colReader.hasNextDouble()) {
-                    if (i == 0) {
-                        this.ColEff += 1;
+            File file = new File (path);
+            Scanner scanner = new Scanner(file);
+
+            if (scanner.hasNextLine()){
+                String str = scanner.nextLine().trim();
+                int i = 0;
+                int j = 0;
+
+                // Menghitung size kolom matriks file
+                while (i < str.length()){
+                    if (str.charAt(i) == ' '){
+                        this.ColEff++;
                     }
-                    colReader.nextDouble();
+                    ++i;
                 }
-                i += 1;
+                this.ColEff++;
+                i = 0;
+
+                Scanner rowreader = new Scanner(file);
+
+                while (rowreader.hasNextDouble()){
+                    double matVal = rowreader.nextDouble();
+                    this.Mat[i][j] = matVal;
+                    j++;
+                    // ganti baris jika sudah kolom terakhir
+                    if (j == this.ColEff){
+                        j = 0;
+                        i++;
+                        this.RowEff++;
+                    }
+                }
+            }else{
+                System.out.println("File is empty");
             }
-            reader.close();
+
         } catch (FileNotFoundException e) {
-            System.out.println("File not found.");
             e.printStackTrace();
         }
-
-        // isi matrix
-        this.Mat = new double[this.RowEff][this.ColEff];
-        File file = new File("..\\test\\matrix.txt");
-        try {
-            Scanner rowReader = new Scanner(file);
-            for (int i = 0; i < this.RowEff; i++) {
-                Scanner colReader = new Scanner(rowReader.nextLine());
-                for (int j = 0; j < this.ColEff; j++) {
-                    double data = colReader.nextDouble();
-                    this.Mat[i][j] = data;
-                }
-                colReader.close();
-            }
-            rowReader.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found.");
-            e.printStackTrace();
-        }
-
     }
 
     public static void printMatrix(MATRIKS Matrix)
