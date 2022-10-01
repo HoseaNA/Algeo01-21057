@@ -10,7 +10,7 @@ public class InvMatrix {
 
             InvMat = InvGaussJordan(Mat);
             System.out.println("Hasil invers adalah :");
-            printMatriks(InvMat);
+            MATRIKS.printMatriks(InvMat);
             displaySavePromptInverse(InvMat);
         } else {
             System.out.println("Please enter input file (.txt)");
@@ -21,7 +21,7 @@ public class InvMatrix {
 
             InvMat = InvGaussJordan(Mat);
             System.out.println("Hasil invers adalah :");
-            printMatriks(InvMat);
+            MATRIKS.printMatriks(InvMat);
             displaySavePromptInverse(InvMat);
             in.close();
         }
@@ -34,7 +34,7 @@ public class InvMatrix {
 
             InvMat = InvCofactor(Mat);
             System.out.println("Hasil invers adalah :");
-            printMatriks(InvMat);
+            MATRIKS.printMatriks(InvMat);
             displaySavePromptInverse(InvMat);
         } else {
             System.out.println("Please enter input file (.txt)");
@@ -45,21 +45,9 @@ public class InvMatrix {
 
             InvMat = InvCofactor(Mat);
             System.out.println("Hasil invers adalah :");
-            printMatriks(InvMat);
+            MATRIKS.printMatriks(InvMat);
             displaySavePromptInverse(InvMat);
             in.close();
-        }
-    }
-
-    public static void printMatriks(double[][] Mat) {
-        int Row = Mat.length;
-        int Col = Mat[0].length;
-
-        for (int i = 0; i < Row; i++) {
-            for (int j = 0; j < Col; j++) {
-                System.out.printf("%.2f ", Mat[i][j]);
-            }
-            System.out.println("\n");
         }
     }
 

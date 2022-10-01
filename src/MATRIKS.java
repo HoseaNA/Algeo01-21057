@@ -118,6 +118,18 @@ public class MATRIKS {
         System.out.println();
     }
 
+    public static void printMatriks(double[][] Mat) {
+        int Row = Mat.length;
+        int Col = Mat[0].length;
+
+        for (int i = 0; i < Row; i++) {
+            for (int j = 0; j < Col; j++) {
+                System.out.printf("%.2f ", Mat[i][j]);
+            }
+            System.out.println("\n");
+        }
+    }
+
     public static boolean isColZero(double[][] mat, int inCol) {
         boolean ColZero = true;
 
