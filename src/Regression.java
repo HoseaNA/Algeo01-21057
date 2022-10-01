@@ -1,5 +1,3 @@
-package Regresi;
-
 import java.util.Scanner;
 import java.text.DecimalFormat;
 

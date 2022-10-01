@@ -1,11 +1,12 @@
 import java.util.*;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.math.*;
 
 public class InterPol {
     static Scanner in = new Scanner(System.in);
 
-    public static void InterPolaStart1() {
+    public static void InterPolaStart1() throws IOException {
         System.out.println("Masukkan titik terakhir (n) :");
         int n = in.nextInt();
 
@@ -15,7 +16,8 @@ public class InterPol {
         System.out.println(" ");
         System.out.println("Masukkan nilai X :");
         double X1 = in.nextDouble();
-        EstimateInterPol(Result, X1);
+        double Estimated = EstimateInterPol(Result, X1);
+        displaySavePromptPolInter(Result, Estimated, X1);
 
         in.close();
     }
@@ -26,7 +28,8 @@ public class InterPol {
         System.out.println(" ");
         System.out.println("Masukkan nilai X :");
         double X1 = in.nextDouble();
-        EstimateInterPol(Result, X1);
+        double Estimated = EstimateInterPol(Result, X1);
+        displaySavePromptPolInter(Result, Estimated, X1);
 
         in.close();
     }
@@ -51,7 +54,7 @@ public class InterPol {
         return Result;
     }
 
-    public static void EstimateInterPol(double[] Result, double X) {
+    public static double EstimateInterPol(double[] Result, double X) {
         System.out.println("");
         double Estimated = 0;
 
@@ -59,6 +62,7 @@ public class InterPol {
             Estimated += Result[i] * (Math.pow(X, i));
         }
         System.out.printf("Hasil taksiran fungsi f(%.3f) = %.4f\n", X, Estimated);
+        return Estimated;
     }
 
     public static void ReadPoint(double[][] X, int n) {
@@ -106,6 +110,67 @@ public class InterPol {
             } else {
                 System.out.printf("%.4fX + ", Res[i]);
             }
+        }
+    }
+
+    public static void displaySavePromptPolInter(double[] Result, double Estimated, double X) throws IOException {
+
+        String prompt;
+        boolean back = false;
+        System.out.println("\nWould you like to save the result? (Y/N) ");
+        System.out.println("Enter Y to Save ");
+        System.out.println("Enter N to Quit\n");
+        Main.displayCommand();
+        do {
+            Scanner scanner = new Scanner(System.in);
+            prompt = scanner.nextLine().toLowerCase();
+            if (prompt.equals("y")) {
+                System.out.println("please enter file name (.txt)");
+                String filename = scanner.nextLine();
+                // Algoritma save to file isi disini
+                writeFilePolInter(filename, Result, Estimated, X);
+                back = true;
+            } else if (prompt.equals("n")) {
+                back = true;
+            }
+        } while (!back);
+    }
+
+    public static void writeFilePolInter(String FileName, double[] Result, double Estimated, double X) {
+        try (FileWriter writer = new FileWriter("../Algeo01-21057/test/output/" + FileName)) {
+            writer.write("Persamaan polinom\n");
+            writer.write("f(x) =  ");
+            writer.write(Double.toString(Result[0]));
+            writer.write(" + ");
+            for (int i = 1; i < Result.length; i++) {
+                if (i > 1) {
+                    if (i != Result.length - 1) {
+                        writer.write(Double.toString(Result[i]));
+                        writer.write("X^");
+                        writer.write(Integer.toString(i));
+                        writer.write(" + ");
+                    } else {
+                        writer.write(Double.toString(Result[i]));
+                        writer.write("X^");
+                        writer.write(Integer.toString(i));
+                    }
+                } else {
+                    writer.write(Double.toString(Result[i]));
+                    writer.write("X + ");
+                }
+            }
+            writer.write("\n");
+            writer.write("\n");
+            writer.write("Hasil taksiran fungsi f(");
+            writer.write(Double.toString(X));
+            writer.write(") = ");
+            writer.write(Double.toString(Estimated));
+            writer.write("\n");
+            writer.write("\n");
+            writer.write("Berhasil menuliskan pada " + FileName);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

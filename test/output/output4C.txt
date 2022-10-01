@@ -1,0 +1,6 @@
+Persamaan polinom
+f(x) =  0.0 + 2.0352572499999897X + -3.5526817708332823X^2 + 3.237114583333252X^3 + -1.4212662760416148X^4 + 0.2362565104166553X^5
+
+Hasil taksiran fungsi f(0.4) = 0.418884
+
+Berhasil menuliskan pada output4C.txt

@@ -1,11 +1,9 @@
-package Regresi;
-
 import java.util.Scanner;
 import java.util.Arrays;
 import java.text.DecimalFormat;
 
 public class Regarr {
-    
+
     double[] Arr = new double[100];
     int Len;
 
@@ -34,11 +32,11 @@ public class Regarr {
         String stringElmt = scanner.nextLine();
         String[] splitElmt = stringElmt.split("\\s+");
         double[] doubleElmt = Arrays.stream(splitElmt).mapToDouble(Double::parseDouble).toArray();
-    
+
         for (int i = 0; i < Len; i++) {
             Array.Arr[i] = doubleElmt[i];
         }
-        
+
     }
 
     public static void Convert(Regarr numArr, String[] strArr) {
@@ -57,7 +55,7 @@ public class Regarr {
         System.out.print("[");
         for (int i = 0; i < Array.Len; i++) {
             System.out.print(df.format(Array.Arr[i]));
-            if (i < Array.Len-1) {
+            if (i < Array.Len - 1) {
                 System.out.print(", ");
             } else {
                 System.out.print("]");

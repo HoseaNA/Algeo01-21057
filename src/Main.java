@@ -1,7 +1,7 @@
 import java.io.IOException;
 import java.util.Scanner;
 
-import static SPL.bicubicInt.M;
+// import static SPL.bicubicInt.M;
 
 public class Main {
     // KAMUS GLOBAL
@@ -377,8 +377,7 @@ public class Main {
         } while (input != 1 && input != 2);
     }
 
-    /** PROSEDUR INVERSE MATRIKS **/
-    public static void inverse() {
+    public static void inverse() throws IOException {
 
         do {
             displaySubInverse();
@@ -393,30 +392,43 @@ public class Main {
         } while (c != 9);
     }
 
-    public static void invMetode1() {
+    public static void invMetode1() throws IOException {
         int input = 0;
-        MATRIKS Matrix = new MATRIKS(rowCap, colcap);
         do {
             displayInputType();
             input = scanner.nextInt();
             if (input == 1) {
                 // Input matriks dengan keyboard
-                InvMatrix.InvStartMethod1();
+                InvMatrix.InvStartMethod1(true);
                 // Save prompt
                 displaySavePrompt();
                 break;
             } else if (input == 2) {
                 // Input matriks dengan file
-                Scanner in = new Scanner(System.in);
-                System.out.println("Please enter input file (.txt)");
+                InvMatrix.InvStartMethod1(false);
+                displaySavePrompt();
+                break;
+            } else {
+                System.out.println("Invalid input");
+                break;
+            }
+        } while (input != 1 && input != 2);
+    }
 
-                String filename = in.nextLine();
-                // Bagian ini isi path di github
-                String origin = "C:\\Users\\LENOVO\\IdeaProjects\\Tubes Algeo\\src\\SPL\\test\\";
-                MATRIKS M = new MATRIKS(origin + filename);
-
-                // Algoritma cari inverse isi disini
-
+    public static void invMetode2() throws IOException {
+        int input = 0;
+        do {
+            displayInputType();
+            input = scanner.nextInt();
+            if (input == 1) {
+                // Input matriks dengan keyboard
+                InvMatrix.InvStartMethod2(true);
+                // Save prompt
+                displaySavePrompt();
+                break;
+            } else if (input == 2) {
+                // Input matriks dengan file
+                InvMatrix.InvStartMethod2(false);
                 // Save prompt
                 displaySavePrompt();
                 break;
@@ -427,48 +439,7 @@ public class Main {
         } while (input != 1 && input != 2);
     }
 
-    public static void invMetode2() {
-        int input = 0;
-        MATRIKS Matrix = new MATRIKS(rowCap, colcap);
-        do {
-            displayInputType();
-            input = scanner.nextInt();
-            if (input == 1) {
-                // Input matriks dengan keyboard
-                InvMatrix.InvStartMethod2();
-
-                // Save prompt
-                displaySavePrompt();
-                break;
-            } else if (input == 2) {
-                // Input matriks dengan file
-                Scanner in = new Scanner(System.in);
-                System.out.println("Please enter input file (.txt)");
-
-                String filename = in.nextLine();
-                // Bagian ini isi path di github
-                String origin = "C:\\Users\\LENOVO\\IdeaProjects\\Tubes Algeo\\src\\SPL\\test\\";
-                MATRIKS M = new MATRIKS(origin + filename);
-
-                // Algoritma cari inverse isi disini
-
-                // Save prompt
-                displaySavePrompt();
-                break;
-            } else {
-                System.out.println("Invalid input");
-                break;
-            }
-        } while (input != 1 && input != 2);
-    }
-
-    /**
-     * PROSEDUR INTERPOLASI POLINOM
-     * 
-     * @throws IOException
-     **/
     public static void polInter() throws IOException {
-
         do {
             displaySubInterpol();
             c = scanner.nextInt();
@@ -482,22 +453,16 @@ public class Main {
 
     public static void polMetode1() throws IOException {
         int input = 0;
-        MATRIKS Matrix = new MATRIKS(rowCap, colcap);
         do {
             displayInputType();
             input = scanner.nextInt();
             if (input == 1) {
                 // Input matriks dengan keyboard
                 InterPol.InterPolaStart1();
-                // Save prompt
-                displaySavePrompt();
                 break;
             } else if (input == 2) {
                 // Input matriks dengan file
                 InterPol.InterPolaStart2();
-
-                // Save prompt
-                displaySavePrompt();
                 break;
             } else {
                 System.out.println("Invalid input");
@@ -527,9 +492,9 @@ public class Main {
             input = scanner.nextInt();
             if (input == 1) {
                 // Input matriks dengan keyboard
-                bicubicInt.inputPoints(M);
-                // Algoritma cari interpolasi bikubik isi disini
-                bicubicInt.bicubicInterpolation(M);
+                // bicubicInt.inputPoints(M);
+                // // Algoritma cari interpolasi bikubik isi disini
+                // bicubicInt.bicubicInterpolation(M);
                 // Save prompt
                 displaySavePrompt();
                 break;

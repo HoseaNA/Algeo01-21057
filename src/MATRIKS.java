@@ -1,22 +1,25 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class MATRIKS {
-    //Atribut
+    // Atribut
     double[][] Mat = new double[100][100];
     int RowEff;
     int ColEff;
 
-    //Method
+    // Method
 
-    //Konstruktor dengan input
+    // Konstruktor dengan input
     MATRIKS(int baris, int kolom) {
         this.RowEff = baris;
         this.ColEff = kolom;
     }
+
     // Konstruktor metode file
-    MATRIKS(String path){
+    MATRIKS(String path) {
         readFileMatrix(path);
 
     }
@@ -37,7 +40,7 @@ public class MATRIKS {
         this.ColEff = N;
     }
 
-    public static double getElmt(MATRIKS M,int baris, int kolom){
+    public static double getElmt(MATRIKS M, int baris, int kolom) {
         return M.Mat[baris][kolom];
     }
 
@@ -65,17 +68,17 @@ public class MATRIKS {
         // I.S : menerima file path dengan format file .txt
         // F.S : membaca file .txt dan menyalin isi ke matriks
         try {
-            File file = new File (path);
+            File file = new File(path);
             Scanner scanner = new Scanner(file);
 
-            if (scanner.hasNextLine()){
+            if (scanner.hasNextLine()) {
                 String str = scanner.nextLine().trim();
                 int i = 0;
                 int j = 0;
 
                 // Menghitung size kolom matriks file
-                while (i < str.length()){
-                    if (str.charAt(i) == ' '){
+                while (i < str.length()) {
+                    if (str.charAt(i) == ' ') {
                         this.ColEff++;
                     }
                     ++i;
@@ -85,18 +88,18 @@ public class MATRIKS {
 
                 Scanner rowreader = new Scanner(file);
 
-                while (rowreader.hasNextDouble()){
+                while (rowreader.hasNextDouble()) {
                     double matVal = rowreader.nextDouble();
                     this.Mat[i][j] = matVal;
                     j++;
                     // ganti baris jika sudah kolom terakhir
-                    if (j == this.ColEff){
+                    if (j == this.ColEff) {
                         j = 0;
                         i++;
                         this.RowEff++;
                     }
                 }
-            }else{
+            } else {
                 System.out.println("File is empty");
             }
 
