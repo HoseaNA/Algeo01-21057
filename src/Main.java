@@ -404,12 +404,10 @@ public class Main {
                 // Input matriks dengan keyboard
                 InvMatrix.InvStartMethod1(true);
                 // Save prompt
-                displaySavePrompt();
                 break;
             } else if (input == 2) {
                 // Input matriks dengan file
                 InvMatrix.InvStartMethod1(false);
-                displaySavePrompt();
                 break;
             } else {
                 System.out.println("Invalid input");
@@ -525,7 +523,7 @@ public class Main {
     }
 
     /** PROSEDUR REGRESI LINEAR BERGANDA **/
-    public static void regression() {
+    public static void regression() throws IOException {
 
         do {
             displaySubRegression();
@@ -538,18 +536,16 @@ public class Main {
         } while (c != 9);
     }
 
-    public static void regMetode1() {
+    public static void regMetode1() throws IOException {
         int input = 0;
         do {
             displayInputType();
             input = scanner.nextInt();
             if (input == 1) {
                 Regression.RegCalc1();
-                Regression.savePrompt();
                 break;
             } else if (input == 2) {
                 Regression.RegCalc2();
-                Regression.savePrompt();
                 break;
             } else {
                 System.out.println("Invalid input");

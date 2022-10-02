@@ -19,7 +19,6 @@ public class InterPol {
         double Estimated = EstimateInterPol(Result, X1);
         displaySavePromptPolInter(Result, Estimated, X1);
 
-        in.close();
     }
 
     public static void InterPolaStart2() throws IOException {
@@ -31,7 +30,6 @@ public class InterPol {
         double Estimated = EstimateInterPol(Result, X1);
         displaySavePromptPolInter(Result, Estimated, X1);
 
-        in.close();
     }
 
     public static double[] SolvedFunctInterPol1(double[][] X, int n) {

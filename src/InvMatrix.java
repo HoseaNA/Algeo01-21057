@@ -23,7 +23,6 @@ public class InvMatrix {
             System.out.println("Hasil invers adalah :");
             MATRIKS.printMatriks(InvMat);
             displaySavePromptInverse(InvMat);
-            in.close();
         }
     }
 
@@ -47,7 +46,6 @@ public class InvMatrix {
             System.out.println("Hasil invers adalah :");
             MATRIKS.printMatriks(InvMat);
             displaySavePromptInverse(InvMat);
-            in.close();
         }
     }
 
@@ -64,7 +62,6 @@ public class InvMatrix {
                 Mat[i][j] = in.nextDouble();
             }
         }
-        in.close();
         return Mat;
     }
 
