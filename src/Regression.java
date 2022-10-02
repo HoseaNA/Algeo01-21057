@@ -269,7 +269,7 @@ public class Regression {
         }
     }
 
-    public static void RegCalc1() {
+    public static void RegCalc1() throws IOException {
 
         Scanner scanner = new Scanner(System.in);
 
@@ -306,10 +306,12 @@ public class Regression {
         System.out.println("\nTaksiran nilai fungsi:");
         System.out.printf("f(xk) = " + "%.4f", (RegRes));
         System.out.println();
+
+        savePromt(numArr, RegRes, inputArr);
         
     }
 
-    public static void RegCalc2() {
+    public static void RegCalc2() throws IOException {
 
         Scanner scanner = new Scanner(System.in);
 
@@ -341,6 +343,8 @@ public class Regression {
         System.out.println("\nTaksiran nilai fungsi:");
         System.out.printf("f(xk) = " + "%.4f", (RegRes));
         System.out.println();
+
+        savePromt(numArr, RegRes, inputArr);
         
     }
 
