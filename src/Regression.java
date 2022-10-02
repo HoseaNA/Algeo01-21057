@@ -1,5 +1,7 @@
 import java.util.Scanner;
 import java.text.DecimalFormat;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Regression {
 
@@ -207,11 +209,69 @@ public class Regression {
         }
     }
 
-    public static void RegCalc() {
+    public static void savePromt(Regarr ResArr, double RegRes, Regarr inputArr) throws IOException {
+        String prompt;
+        boolean back = false;
+        System.out.println("\nApakah ingin menyimpan hasil? (Y/N) ");
+        do {
+            Scanner scanner = new Scanner(System.in);
+            prompt = scanner.nextLine().toLowerCase();
+            if (prompt.equals("y")) {
+                System.out.println("Masukkan nama file (.txt)");
+                String filename = scanner.nextLine();
+                // Algoritma save to file isi disini
+                writeFile(filename, ResArr, RegRes, inputArr);
+                back = true;
+            } else if (prompt.equals("n")) {
+                back = true;
+            }
+        } while (!back);
+    }
+
+    public static void writeFile(String FileName, Regarr ResArr, double RegRes, Regarr inputArr) {
+        try (FileWriter writer = new FileWriter("../Algeo01-21057/test/output/" + FileName)) {
+            writer.write("Persamaan regresi:\n");
+            writer.write("f(x) =  ");
+            writer.write(Double.toString(ResArr.Arr[0]));
+            writer.write(" + ");
+            for (int i = 1; i < ResArr.Len; i++) {
+                if (i > 1) {
+                    if (i != ResArr.Len-1) {
+                        writer.write(Double.toString(ResArr.Arr[i]));
+                        writer.write("X");
+                        writer.write(Integer.toString(i));
+                        writer.write(" + ");
+                    } else {
+                        writer.write(Double.toString(ResArr.Arr[i]));
+                        writer.write("X^");
+                        writer.write(Integer.toString(i));
+                    }
+                } else {
+                    writer.write(Double.toString(ResArr.Arr[i]));
+                    writer.write("X1 + ");
+                }
+            }
+            writer.write("\n");
+            writer.write("Hasil taksiran fungsi f(");
+            for (int i = 0; i < inputArr.Len; i++) {
+                writer.write(Double.toString(inputArr.Arr[i]));
+                if (i < inputArr.Len-1) {
+                    writer.write(", ");
+                }
+            }
+            writer.write(") = ");
+            writer.write(Double.toString(RegRes));
+            writer.write("\n");
+            writer.write("Berhasil menuliskan pada " + FileName);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void RegCalc1() {
 
         Scanner scanner = new Scanner(System.in);
-        DecimalFormat df = new DecimalFormat();
-        df.setMaximumFractionDigits(2);
 
         System.out.println("\nMasukkan nilai n (jumlah peubah x):");
         int n = Integer.parseInt(scanner.nextLine());
@@ -233,18 +293,55 @@ public class Regression {
         Regarr numArr = new Regarr(100);
         Regarr.Convert(numArr, strArr);
 
-        double result = 0;
+        double RegRes = 0;
         for (int i = 0; i < numArr.Len; i++) {
             if (i == 0) {
-                result += numArr.Arr[i];
+                RegRes += numArr.Arr[i];
             } else {
-                result += numArr.Arr[i]*inputArr.Arr[i-1];
+                RegRes += numArr.Arr[i]*inputArr.Arr[i-1];
             }
         }
 
-        System.out.println("\nTaksiran nilai fungsi xk:");
-        System.out.println(df.format(result));
+        Regarr.printFunct(numArr);
+        System.out.println("\nTaksiran nilai fungsi:");
+        System.out.printf("f(xk) = " + "%.4f", (RegRes));
+        System.out.println();
+        
+    }
 
+    public static void RegCalc2() {
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("\nMasukkan nama file:");
+        String fileName = scanner.nextLine();
+
+        Regmat fileMat = new Regmat(0, 0);
+        Regmat.readFile(fileName, fileMat);
+
+        Regarr inputArr = new Regarr(100);
+        Regarr.readArr(inputArr, fileMat.ColEff-1);
+
+        rowEchelon(fileMat);
+        String[] strArr = GaussSolver(fileMat);
+
+        Regarr numArr = new Regarr(100);
+        Regarr.Convert(numArr, strArr);
+
+        double RegRes = 0;
+        for (int i = 0; i < numArr.Len; i++) {
+            if (i == 0) {
+                RegRes += numArr.Arr[i];
+            } else {
+                RegRes += numArr.Arr[i]*inputArr.Arr[i-1];
+            }
+        }
+
+        Regarr.printFunct(numArr);
+        System.out.println("\nTaksiran nilai fungsi:");
+        System.out.printf("f(xk) = " + "%.4f", (RegRes));
+        System.out.println();
+        
     }
 
 }

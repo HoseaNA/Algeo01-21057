@@ -87,7 +87,10 @@ public class Main {
     }
 
     public static void displaySubRegression() {
-
+        System.out.println("\n************Regresi Linier Berganda************");
+        System.out.println("1. Mencari nilai regresi linier berganda");
+        System.out.println("9. Back to Main Menu");
+        System.out.println();
     }
 
     public static void displayInputType() {
@@ -527,10 +530,8 @@ public class Main {
         do {
             displaySubRegression();
             c = scanner.nextInt();
-            if (c == 1) { // Metode determinan cara 1
+            if (c == 1) { // Metode dikenali, memilih metode input regresi
                 regMetode1();
-            } else if (c == 2) { // Metode determinan cara 2
-                regMetode2();
             } else { // Metode tidak dikenali
                 System.out.println("Invalid input");
             }
@@ -539,68 +540,16 @@ public class Main {
 
     public static void regMetode1() {
         int input = 0;
-        MATRIKS Matrix = new MATRIKS(rowCap, colcap);
         do {
             displayInputType();
             input = scanner.nextInt();
             if (input == 1) {
-                // Input matriks dengan keyboard
-                MATRIKS.readMatrix(Matrix);
-                // Algoritma cari regresi isi disini
-
-                // Save prompt
-                displaySavePrompt();
+                Regression.RegCalc1();
+                Regression.savePrompt();
                 break;
             } else if (input == 2) {
-                // Input matriks dengan file
-                Scanner in = new Scanner(System.in);
-                System.out.println("Please enter input file (.txt)");
-
-                String filename = in.nextLine();
-                // Bagian ini isi path di github
-                String origin = "C:\\Users\\LENOVO\\IdeaProjects\\Tubes Algeo\\src\\SPL\\test\\";
-                MATRIKS M = new MATRIKS(origin + filename);
-
-                // Algoritma cari regresi isi disini
-
-                // Save prompt
-                displaySavePrompt();
-                break;
-            } else {
-                System.out.println("Invalid input");
-                break;
-            }
-        } while (input != 1 && input != 2);
-    }
-
-    public static void regMetode2() {
-        int input = 0;
-        MATRIKS Matrix = new MATRIKS(rowCap, colcap);
-        do {
-            displayInputType();
-            input = scanner.nextInt();
-            if (input == 1) {
-                // Input matriks dengan keyboard
-                MATRIKS.readMatrix(Matrix);
-                // Algoritma cari regresi isi disini
-
-                // Save prompt
-                displaySavePrompt();
-                break;
-            } else if (input == 2) {
-                // Input matriks dengan file
-                Scanner in = new Scanner(System.in);
-                System.out.println("Please enter input file (.txt)");
-
-                String filename = in.nextLine();
-                // Bagian ini isi path di github
-                String origin = "C:\\Users\\LENOVO\\IdeaProjects\\Tubes Algeo\\src\\SPL\\test\\";
-                MATRIKS M = new MATRIKS(origin + filename);
-
-                // Algoritma cari regresi isi disini
-
-                // Save prompt
-                displaySavePrompt();
+                Regression.RegCalc2();
+                Regression.savePrompt();
                 break;
             } else {
                 System.out.println("Invalid input");
