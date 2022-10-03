@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class bicubicInt {
     // Kamus lokal
@@ -37,15 +39,17 @@ public class bicubicInt {
         }
     }
 
-    public static void inputXY(){
+    public static double[] inputXY(){
         System.out.println("\nMencari nilai f(x,y) dengan interpolasi bikubik\n");
         System.out.println("Input nilai x : ");
         x = scan.nextDouble();
         System.out.println("Input nilai y : ");
         y = scan.nextDouble();
+        double[] xy = {x,y};
+        return xy;
     }
 
-    public static void findCubicInter(MATRIKS M){
+    public static double findCubicInter(MATRIKS M){
         // Assign values
         for(i=0;i<4;++i){
             for(j=0;j<4;++j){
@@ -82,6 +86,34 @@ public class bicubicInt {
             }
         }
         System.out.printf("\nNilai dari f(%.3f,%.3f) adalah %.3f\n", x,y,hasil);
+        return hasil;
     }
+
+    public static void writeFileBicubic(String FileName, MATRIKS Matrix, double[]xy, double hasil) {
+        try (FileWriter writer = new FileWriter("../Algeo01-21057/test/output/" + FileName)) {
+            writer.write("\nInput Matrix : \n");
+
+            String s ="";
+            for(i=0;i<4;++i){
+                for(j=0;j<4;++j){
+                    writer.write("\nMasukkan nilai dari f(" + (i-1) +"," + (j-1) + ") :\n");
+                    String elem = String.format("%.3f", Matrix.Mat[i][j]);
+                    s += (elem + " ");
+                    writer.write(s);
+                    s = "";
+                }
+            }
+            writer.write("\n");
+            // double[] xy = inputXY();
+            writer.write("\nNilai dari f(" + xy[0] + "," + xy[1] + ") adalah : " + hasil + "\n");
+            writer.write("\n");
+            
+            writer.write("\nBerhasil menuliskan pada " + FileName);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
 }
 

@@ -144,6 +144,27 @@ public class Main {
             }
         } while (!back);
     }
+    public static void displaySavePromptBicubic(MATRIKS Matrix, double[]xy, double hasil) {
+
+        String prompt;
+        boolean back = false;
+        System.out.println("\nWould you like to save the result? (Y/N) ");
+        System.out.println("Enter Y to Save ");
+        System.out.println("Enter N to Quit\n");
+        displayCommand();
+        do {
+            prompt = scanner.nextLine().toLowerCase();
+            if (prompt.equals("y")) {
+                System.out.println("please enter file name (.txt)");
+                String filename = scanner.nextLine();
+                // Algoritma save to file isi disini
+                bicubicInt.writeFileBicubic(filename,Matrix,xy,hasil);
+                back = true;
+            } else if (prompt.equals("n")) {
+                back = true;
+            }
+        } while (!back);
+    }
 
     // Prosedur untuk memilih menu selanjutnya
     public static void optionBranch(int option) throws IOException {
@@ -479,11 +500,13 @@ public class Main {
             input = scanner.nextInt();
             if (input == 1) {
                 // Input matriks dengan keyboard
-                // bicubicInt.inputPoints(M);
-                // // Algoritma cari interpolasi bikubik isi disini
-                // bicubicInt.bicubicInterpolation(M);
+                MATRIKS M = new MATRIKS(4, 4);
+                bicubicInt.inputPoints(M);
+                // Algoritma cari interpolasi bikubik isi disini
+                double[] XY = bicubicInt.inputXY();
+                double hasil = bicubicInt.findCubicInter(M);
                 // Save prompt
-                displaySavePrompt();
+                displaySavePromptBicubic(M, XY, hasil);
                 break;
             } else if (input == 2) {
                 // Input matriks dengan file
@@ -497,9 +520,10 @@ public class Main {
                 String origin = "C:\\Users\\LENOVO\\IdeaProjects\\Tubes Algeo\\src\\SPL\\test\\";
                 MATRIKS M = new MATRIKS(origin + filename);
                 // Algoritma cari interpolasi bikubik isi disini
-                bicubicInt.bicubicInterpolation(M);
+                double[] XY = bicubicInt.inputXY();
+                double hasil = bicubicInt.findCubicInter(M);
                 // Save prompt
-                displaySavePrompt();
+                displaySavePromptBicubic(M, XY, hasil);
                 break;
             } else {
                 System.out.println("Invalid input");
