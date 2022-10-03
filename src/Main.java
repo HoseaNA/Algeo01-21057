@@ -116,13 +116,14 @@ public class Main {
                 System.out.println("please enter file name (.txt)");
                 String filename = scanner.nextLine();
                 // Algoritma save to file isi disini
-        
+
                 back = true;
             } else if (prompt.equals("n")) {
                 back = true;
             }
         } while (!back);
     }
+
     public static void displaySavePromptGauss(MATRIKS Matrix, MATRIKS hasil) {
 
         String prompt;
@@ -137,14 +138,15 @@ public class Main {
                 System.out.println("please enter file name (.txt)");
                 String filename = scanner.nextLine();
                 // Algoritma save to file isi disini
-                Gauss.writeFileGauss(filename,Matrix,hasil);
+                Gauss.writeFileGauss(filename, Matrix, hasil);
                 back = true;
             } else if (prompt.equals("n")) {
                 back = true;
             }
         } while (!back);
     }
-    public static void displaySavePromptBicubic(MATRIKS Matrix, double[]xy, double hasil) {
+
+    public static void displaySavePromptBicubic(MATRIKS Matrix, double[] xy, double hasil) {
 
         String prompt;
         boolean back = false;
@@ -158,7 +160,7 @@ public class Main {
                 System.out.println("please enter file name (.txt)");
                 String filename = scanner.nextLine();
                 // Algoritma save to file isi disini
-                bicubicInt.writeFileBicubic(filename,Matrix,xy,hasil);
+                bicubicInt.writeFileBicubic(filename, Matrix, xy, hasil);
                 back = true;
             } else if (prompt.equals("n")) {
                 back = true;
@@ -262,8 +264,8 @@ public class Main {
             MATRIKS.printMatrix(hasil);
             Gauss.printSolution(hasil);
 
-            displaySavePromptGauss(Matrix,hasil);
-            
+            displaySavePromptGauss(Matrix, hasil);
+
         } else if (choice == 2) {
             // Input matriks dengan file
 
@@ -282,7 +284,7 @@ public class Main {
             MATRIKS.printMatrix(hasil);
             Gauss.printSolution(hasil);
 
-            displaySavePromptGauss(M,hasil);
+            displaySavePromptGauss(M, hasil);
         } else {
             System.out.println("Invalid input");
         }
@@ -290,7 +292,7 @@ public class Main {
 
     public static void gaussjordanElim() {
         MATRIKS Matrix = new MATRIKS(rowCap, colcap);
-        
+
         displayInputType();
         if (choice == 1) {
             MATRIKS.readMatrix(Matrix);
@@ -303,7 +305,7 @@ public class Main {
             MATRIKS.printMatrix(hasil);
             Gauss.printSolution(hasil);
 
-            displaySavePromptGauss(Matrix,hasil);
+            displaySavePromptGauss(Matrix, hasil);
         } else if (c == 2) {
             // Input matriks dengan file
             Scanner in = new Scanner(System.in);
@@ -323,7 +325,7 @@ public class Main {
             MATRIKS.printMatrix(hasil);
             Gauss.printSolution(hasil);
 
-            displaySavePromptGauss(M,hasil);
+            displaySavePromptGauss(M, hasil);
         } else {
             System.out.println("Invalid input");
         }
@@ -455,14 +457,10 @@ public class Main {
             if (input == 1) {
                 // Input matriks dengan keyboard
                 InvMatrix.InvStartMethod2(true);
-                // Save prompt
-                displaySavePrompt();
                 break;
             } else if (input == 2) {
                 // Input matriks dengan file
                 InvMatrix.InvStartMethod2(false);
-                // Save prompt
-                displaySavePrompt();
                 break;
             } else {
                 System.out.println("Invalid input");
