@@ -1,4 +1,4 @@
-# Tugas Besar Aljabar Geometri 01
+# Tugas Besar Aljabar Linier dan Geometri 01
 ## IF2123 Aljabar Linier dan Geometri
 
 ## Deskripsi
@@ -29,6 +29,6 @@ Hal yang perlu diunduh adalah sebagai berikut:
    
 ## Kontributor
 Program ini dibentuk oleh
-1. Hosea Nathanael Abetnego             (13520057)
+1. Hosea Nathanael Abetnego             (13521057)
 2. Ahmad Ghulam Ilham                   (13521118)
 3. Muhammad Naufal Nalendra             (13521152)
