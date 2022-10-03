@@ -329,8 +329,23 @@ public class Main {
         }
     }
 
-    public static void inverseEq() {
-
+    public static void inverseEq() throws IOException {
+        do {
+            displayInputType();
+            if (choice == 1) {
+                // Input matriks dengan keyboard
+                InvSpl.findSol(true);
+                // Save prompt
+                break;
+            } else if (choice == 2) {
+                // Input matriks dengan file
+                InvSpl.findSol(false);
+                break;
+            } else {
+                System.out.println("Invalid input");
+                break;
+            }
+        } while (choice != 1 && choice != 2);
     }
 
     public static void cramer() throws IOException {
