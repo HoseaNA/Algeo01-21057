@@ -6,7 +6,7 @@ Program ini dibuat untuk memenuhi Tugas Besar Pertama Mata Kuliah IF2123 Aljabar
 1. Menentukan solusi SPL dengan metode Gauss, Gauss-Jordan, Matriks Balikan, dan Kaidah Cramer.
 2. Menentukan Determinan matriks dengan metode Gauss, Gauss-Jordan, dan Ekspansi Kofaktor.
 3. Menentukan Matriks Balikan dengan metode Gauss-Jordan, dan Ekspansi Kofaktor.
-4. Interpolasi Polinom, Interpolasi Kubik, dan Regresi Linier Berganda
+4. Interpolasi Polinom, Interpolasi Bikubik, dan Regresi Linier Berganda
 
 Terdapat beberapa direktori pada _repository_ ini, yaitu:
 1. `bin` berisi java bytecode (*.class) program.
