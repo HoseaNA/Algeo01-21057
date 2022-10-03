@@ -1,5 +1,6 @@
 # Tugas Besar Aljabar Linier dan Geometri 01
 ## IF2123 Aljabar Linier dan Geometri
+### Kelompok 40 - IntVerse
 
 ## Deskripsi
 Program ini dibuat untuk memenuhi Tugas Besar Pertama Mata Kuliah IF2123 Aljabar Linier dan Geometri. Bahasa yang digunakan untuk membentuk program ini adalah Java. Program ditujukan untuk menyelesaikan persoalan seperti berikut:
