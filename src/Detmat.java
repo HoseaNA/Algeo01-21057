@@ -1,6 +1,8 @@
 import java.util.Scanner;
 import java.util.Arrays;
-import java.text.DecimalFormat;
+import java.io.File;
+import java.io.FileNotFoundException;
+
 
 public class Detmat {
 
@@ -49,15 +51,39 @@ public class Detmat {
 
     }
 
-    public static void printMat(Detmat Matrix) {
+    public static void readFile(String fileName, Detmat Matrix) {
+        try {
+            File file = new File ("../Algeo01-21057/test/" + fileName);
+            Scanner scanner = new Scanner(file);
+            if (scanner.hasNextLine()){
+                while (scanner.hasNextLine()) {
+                    scanner.nextLine();
+                    Matrix.RowEff++;
+                }
+                Scanner getElmt = new Scanner(file);
+                if (getElmt.hasNextLine()){
+                    for (int i = 0; i < Matrix.RowEff; i++) {
+                        String stringElmt = getElmt.nextLine();
+                        String[] splitElmt = stringElmt.split("\\s+");
+                        double[] doubleElmt = Arrays.stream(splitElmt).mapToDouble(Double::parseDouble).toArray();
+                        Matrix.ColEff = doubleElmt.length;
+                        Matrix.Mat[i] = doubleElmt;
+                    }
+                }
+            } else {
+                System.out.println("File is empty");
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
-        DecimalFormat df = new DecimalFormat();
-        df.setMaximumFractionDigits(2);
+    public static void printMat(Detmat Matrix) {
 
         for (int i = 0; i < Matrix.RowEff; i++) {
             System.out.print("[");
             for (int j = 0; j < Matrix.ColEff; j++) {
-                System.out.print(df.format(Matrix.Mat[i][j]));
+                System.out.printf("%.4f", (Matrix.Mat[i][j]));
                 if (j < Matrix.ColEff-1) {
                     System.out.print(", ");
                 } else {
