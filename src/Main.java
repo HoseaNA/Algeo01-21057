@@ -89,8 +89,8 @@ public class Main {
     public static void displaySubRegression() {
         System.out.println("\n************Regresi Linier Berganda************");
         System.out.println("1. Mencari nilai regresi linier berganda");
-        System.out.println("9. Back to Main Menu");
-        System.out.println();
+        System.out.println("9. Back to Main Menu\n");
+        displayCommand();
     }
 
     public static void displayInputType() {
@@ -116,7 +116,49 @@ public class Main {
                 System.out.println("please enter file name (.txt)");
                 String filename = scanner.nextLine();
                 // Algoritma save to file isi disini
+        
+                back = true;
+            } else if (prompt.equals("n")) {
+                back = true;
+            }
+        } while (!back);
+    }
+    public static void displaySavePromptGauss(MATRIKS Matrix, MATRIKS hasil) {
 
+        String prompt;
+        boolean back = false;
+        System.out.println("\nWould you like to save the result? (Y/N) ");
+        System.out.println("Enter Y to Save ");
+        System.out.println("Enter N to Quit\n");
+        displayCommand();
+        do {
+            prompt = scanner.nextLine().toLowerCase();
+            if (prompt.equals("y")) {
+                System.out.println("please enter file name (.txt)");
+                String filename = scanner.nextLine();
+                // Algoritma save to file isi disini
+                Gauss.writeFileGauss(filename,Matrix,hasil);
+                back = true;
+            } else if (prompt.equals("n")) {
+                back = true;
+            }
+        } while (!back);
+    }
+    public static void displaySavePromptBicubic(MATRIKS Matrix, double[]xy, double hasil) {
+
+        String prompt;
+        boolean back = false;
+        System.out.println("\nWould you like to save the result? (Y/N) ");
+        System.out.println("Enter Y to Save ");
+        System.out.println("Enter N to Quit\n");
+        displayCommand();
+        do {
+            prompt = scanner.nextLine().toLowerCase();
+            if (prompt.equals("y")) {
+                System.out.println("please enter file name (.txt)");
+                String filename = scanner.nextLine();
+                // Algoritma save to file isi disini
+                bicubicInt.writeFileBicubic(filename,Matrix,xy,hasil);
                 back = true;
             } else if (prompt.equals("n")) {
                 back = true;
@@ -172,7 +214,7 @@ public class Main {
     /** Setiap prosedur dari pilihan main menu beserta submenu dan prosesnya **/
 
     /** PROSEDUR SPL **/
-    public static void SPL() {
+    public static void SPL() throws IOException {
 
         do {
             displaySubSPL();
@@ -212,15 +254,16 @@ public class Main {
         displayInputType();
         if (choice == 1) {
             MATRIKS.readMatrix(Matrix);
-            System.out.println("\nInput Matrix : ");
+            MATRIKS hasil = MATRIKS.copyMatriks(Matrix);
+            System.out.println("Input Matrix : \n");
             MATRIKS.printMatrix(Matrix);
-            System.out.println("Matriks hasil operasi : ");
-            Gauss.rowEchelon(Matrix);
-            MATRIKS.printMatrix(Matrix);
-            Gauss.printSolution(Matrix);
+            System.out.println("Matriks hasil operasi : \n");
+            Gauss.rowEchelon(hasil);
+            MATRIKS.printMatrix(hasil);
+            Gauss.printSolution(hasil);
 
-            displaySavePrompt();
-
+            displaySavePromptGauss(Matrix,hasil);
+            
         } else if (choice == 2) {
             // Input matriks dengan file
 
@@ -231,15 +274,15 @@ public class Main {
             // Bagian ini isi path di github
             String origin = "C:\\Users\\LENOVO\\IdeaProjects\\Tubes Algeo\\src\\SPL\\test\\";
             MATRIKS M = new MATRIKS(origin + filename);
+            MATRIKS hasil = MATRIKS.copyMatriks(M);
+            System.out.println("\nInput Matrix : \n");
+            MATRIKS.printMatrix(hasil);
+            System.out.println("Matriks hasil operasi : \n");
+            Gauss.rowEchelon(hasil);
+            MATRIKS.printMatrix(hasil);
+            Gauss.printSolution(hasil);
 
-            System.out.println("\nInput Matrix : ");
-            MATRIKS.printMatrix(M);
-            System.out.println("Matriks hasil operasi : ");
-            Gauss.rowEchelon(M);
-            MATRIKS.printMatrix(M);
-            Gauss.printSolution(M);
-
-            displaySavePrompt();
+            displaySavePromptGauss(M,hasil);
         } else {
             System.out.println("Invalid input");
         }
@@ -247,19 +290,20 @@ public class Main {
 
     public static void gaussjordanElim() {
         MATRIKS Matrix = new MATRIKS(rowCap, colcap);
-
+        
         displayInputType();
         if (choice == 1) {
             MATRIKS.readMatrix(Matrix);
-            System.out.println("Input Matrix : ");
+            MATRIKS hasil = MATRIKS.copyMatriks(Matrix);
+            System.out.println("Input Matrix : \n");
             MATRIKS.printMatrix(Matrix);
-            System.out.println("Matriks hasil operasi : ");
-            Gauss.rowEchelon(Matrix);
-            Gauss.reducedRE(Matrix);
-            MATRIKS.printMatrix(Matrix);
-            Gauss.printSolution(Matrix);
+            System.out.println("Matriks hasil operasi : \n");
+            Gauss.rowEchelon(hasil);
+            Gauss.reducedRE(hasil);
+            MATRIKS.printMatrix(hasil);
+            Gauss.printSolution(hasil);
 
-            displaySavePrompt();
+            displaySavePromptGauss(Matrix,hasil);
         } else if (c == 2) {
             // Input matriks dengan file
             Scanner in = new Scanner(System.in);
@@ -267,17 +311,19 @@ public class Main {
 
             String filename = in.nextLine();
             // Bagian ini isi path di github
-            String origin = "C:\\Users\\LENOVO\\IdeaProjects\\Tubes Algeo\\src\\SPL\\test\\";
+            String origin = "C:\\Users\\LENOVO\\OneDrive - Institut Teknologi Bandung\\Documents\\GitHub\\Algeo01-21057\\test\\";
             MATRIKS M = new MATRIKS(origin + filename);
 
-            System.out.println("\nInput Matrix : ");
-            MATRIKS.printMatrix(M);
-            System.out.println("Matriks hasil operasi : ");
-            Gauss.rowEchelon(M);
-            MATRIKS.printMatrix(M);
-            Gauss.printSolution(M);
+            MATRIKS hasil = MATRIKS.copyMatriks(M);
+            System.out.println("\nInput Matrix : \n");
+            MATRIKS.printMatrix(hasil);
+            System.out.println("Matriks hasil operasi : \n");
+            Gauss.rowEchelon(hasil);
+            Gauss.reducedRE(hasil);
+            MATRIKS.printMatrix(hasil);
+            Gauss.printSolution(hasil);
 
-            displaySavePrompt();
+            displaySavePromptGauss(M,hasil);
         } else {
             System.out.println("Invalid input");
         }
@@ -287,16 +333,26 @@ public class Main {
 
     }
 
-    public static void cramer() {
-
+    public static void cramer() throws IOException {
+        do {
+            displayInputType();
+            if (choice == 1) {
+                Cramer.CramCalc1();
+                break;
+            } else if (choice == 2) {
+                Cramer.CramCalc2();
+                break;
+            } else {
+                System.out.println("Invalid input");
+                break;
+            }
+        } while (choice != 1 && choice != 2);
     }
 
     /** PROSEDUR DETERMINAN **/
-    public static void determinant() {
-
+    public static void determinant() throws IOException {
         do {
             displaySubDet();
-            displayCommand();
             c = scanner.nextInt();
             if (c == 1) { // Metode determinan cara 1
                 detMetode1();
@@ -308,76 +364,36 @@ public class Main {
         } while (c != 9);
     }
 
-    public static void detMetode1() {
-        int input = 0;
-        MATRIKS Matrix = new MATRIKS(rowCap, colcap);
+    public static void detMetode1() throws IOException {
         do {
             displayInputType();
-            input = scanner.nextInt();
-            if (input == 1) {
-                // Input matriks dengan keyboard
-                MATRIKS.readMatrix(Matrix);
-                // Algoritma cari determinan isi disini
-
-                // Save prompt
-                displaySavePrompt();
+            if (choice == 1) {
+                Expansion.ExpCalc1();
                 break;
-            } else if (input == 2) {
-                // Input matriks dengan file
-                Scanner in = new Scanner(System.in);
-                System.out.println("Please enter input file (.txt)");
-
-                String filename = in.nextLine();
-                // Bagian ini isi path di github
-                String origin = "C:\\Users\\LENOVO\\IdeaProjects\\Tubes Algeo\\src\\SPL\\test\\";
-                MATRIKS M = new MATRIKS(origin + filename);
-
-                // Algoritma cari determinan isi disini
-
-                // Save prompt
-                displaySavePrompt();
+            } else if (choice == 2) {
+                Expansion.ExpCalc2();
                 break;
             } else {
                 System.out.println("Invalid input");
                 break;
             }
-        } while (input != 1 && input != 2);
+        } while (choice != 1 && choice != 2);
     }
 
-    public static void detMetode2() {
-        int input = 0;
-        MATRIKS Matrix = new MATRIKS(rowCap, colcap);
+    public static void detMetode2() throws IOException {
         do {
             displayInputType();
-            input = scanner.nextInt();
-            if (input == 1) {
-                // Input matriks dengan keyboard
-                MATRIKS.readMatrix(Matrix);
-                // Algoritma cari determinan isi disini
-
-                // Save prompt
-                displaySavePrompt();
+            if (choice == 1) {
+                Reduction.RedCalc1();
                 break;
-            } else if (input == 2) {
-                // Input matriks dengan file
-                Scanner in = new Scanner(System.in);
-                System.out.println("Please enter input file (.txt)");
-
-                String filename = in.nextLine();
-                // Bagian ini isi path di github
-                String origin = "C:\\Users\\LENOVO\\IdeaProjects\\Tubes Algeo\\src\\SPL\\test\\";
-                MATRIKS M = new MATRIKS(origin + filename);
-
-                // Algoritma cari determinan isi disini
-
-                // Save prompt
-                displaySavePrompt();
+            } else if (choice == 2) {
+                Reduction.RedCalc2();
                 break;
             } else {
                 System.out.println("Invalid input");
                 break;
             }
-        } while (input != 1 && input != 2);
+        } while (choice != 1 && choice != 2);
     }
 
     public static void inverse() throws IOException {
@@ -493,11 +509,13 @@ public class Main {
             input = scanner.nextInt();
             if (input == 1) {
                 // Input matriks dengan keyboard
-                // bicubicInt.inputPoints(M);
-                // // Algoritma cari interpolasi bikubik isi disini
-                // bicubicInt.bicubicInterpolation(M);
+                MATRIKS M = new MATRIKS(4, 4);
+                bicubicInt.inputPoints(M);
+                // Algoritma cari interpolasi bikubik isi disini
+                double[] XY = bicubicInt.inputXY();
+                double hasil = bicubicInt.findCubicInter(M);
                 // Save prompt
-                displaySavePrompt();
+                displaySavePromptBicubic(M, XY, hasil);
                 break;
             } else if (input == 2) {
                 // Input matriks dengan file
@@ -511,9 +529,10 @@ public class Main {
                 String origin = "C:\\Users\\LENOVO\\IdeaProjects\\Tubes Algeo\\src\\SPL\\test\\";
                 MATRIKS M = new MATRIKS(origin + filename);
                 // Algoritma cari interpolasi bikubik isi disini
-                bicubicInt.bicubicInterpolation(M);
+                double[] XY = bicubicInt.inputXY();
+                double hasil = bicubicInt.findCubicInter(M);
                 // Save prompt
-                displaySavePrompt();
+                displaySavePromptBicubic(M, XY, hasil);
                 break;
             } else {
                 System.out.println("Invalid input");
@@ -537,21 +556,19 @@ public class Main {
     }
 
     public static void regMetode1() throws IOException {
-        int input = 0;
         do {
             displayInputType();
-            input = scanner.nextInt();
-            if (input == 1) {
+            if (choice == 1) {
                 Regression.RegCalc1();
                 break;
-            } else if (input == 2) {
+            } else if (choice == 2) {
                 Regression.RegCalc2();
                 break;
             } else {
                 System.out.println("Invalid input");
                 break;
             }
-        } while (input != 1 && input != 2);
+        } while (choice != 1 && choice != 2);
     }
 
 }

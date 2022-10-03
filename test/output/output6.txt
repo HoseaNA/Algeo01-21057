@@ -1,0 +1,4 @@
+Persamaan regresi:
+f(x) =  -3.5077781408756756 + -0.002624990745879573x1 + 7.989410472210296E-4x2 + 0.1541550301980388x3
+Hasil taksiran fungsi f(50.0, 76.0, 29.3) = 0.9384342262216814
+Berhasil menuliskan pada output5.txt

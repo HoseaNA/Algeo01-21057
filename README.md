@@ -1,4 +1,4 @@
-# Tugas Besar Aljabar Geometri 01
+# Tugas Besar Aljabar Linier dan Geometri 01
 ## IF2123 Aljabar Linier dan Geometri
 
 ## Deskripsi
@@ -6,7 +6,7 @@ Program ini dibuat untuk memenuhi Tugas Besar Pertama Mata Kuliah IF2123 Aljabar
 1. Menentukan solusi SPL dengan metode Gauss, Gauss-Jordan, Matriks Balikan, dan Kaidah Cramer.
 2. Menentukan Determinan matriks dengan metode Gauss, Gauss-Jordan, dan Ekspansi Kofaktor.
 3. Menentukan Matriks Balikan dengan metode Gauss-Jordan, dan Ekspansi Kofaktor.
-4. Interpolasi Polinom, Interpolasi Kubik, dan Regresi Linier Berganda
+4. Interpolasi Polinom, Interpolasi Bikubik, dan Regresi Linier Berganda
 
 Terdapat beberapa direktori pada _repository_ ini, yaitu:
 1. `bin` berisi java bytecode (*.class) program.
@@ -29,6 +29,6 @@ Hal yang perlu diunduh adalah sebagai berikut:
    
 ## Kontributor
 Program ini dibentuk oleh
-1. Hosea Nathanael Abetnego             (13520057)
+1. Hosea Nathanael Abetnego             (13521057)
 2. Ahmad Ghulam Ilham                   (13521118)
 3. Muhammad Naufal Nalendra             (13521152)

@@ -217,6 +217,18 @@ public class MATRIKS {
         return mCopy;
     }
 
+    public static MATRIKS copyMatriks(MATRIKS M) {
+        MATRIKS mCopy = new MATRIKS(M.RowEff, M.ColEff);
+        MATRIKS temp = new MATRIKS(M.RowEff, M.ColEff);
+        for (int i = 0; i < M.RowEff; i++) {
+            for (int j = 0; j < M.ColEff; j++) {
+                temp.Mat[i][j] = M.Mat[i][j];
+                mCopy.Mat[i][j] = temp.Mat[i][j];
+            }
+        }
+        return mCopy;
+    }
+
     /*** Fungsi Pengubah Bentuk Matriks ***/
     public static void reducedRE(double[][] M) {
         // I.S : Menerima matriks M yang berbentuk rowEchelon

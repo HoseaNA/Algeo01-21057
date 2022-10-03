@@ -1,13 +1,10 @@
 import java.text.DecimalFormat;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Gauss {
 
-    /**
-     * Missing:
-     * 1. method to RowEchelon matrix
-     * 1. method to print solution
-     **/
-
+    
     /*** Fungsi Mencari Solusi dari Matriks ***/
     /***
      * Prekondisi: Matriks sudah berbentuk Row Echelon atau Reduced Row Echelon
@@ -192,7 +189,7 @@ public class Gauss {
 
         // KAMUS LOKAL
         double ratio;
-        double temp;
+        
 
         int i, j, k, l;
 
@@ -207,69 +204,70 @@ public class Gauss {
                 ratio = 1;
                 leadElmt = true;
                 for (j = 0; j < M.ColEff; j++) {
-                    if (leadElmt && M.Mat[k][j] != 0) {
+                    if (leadElmt && !isElmtZero(M, k, j)) {
                         ratio = 1 / M.Mat[k][j];
                         M.Mat[k][j] *= ratio;
                         leadElmt = false;
-                    } else if (!leadElmt && M.Mat[k][j] != 0) {
+                    } else if (!leadElmt && !isElmtZero(M, k, j)) {
                         M.Mat[k][j] *= ratio;
                     }
                 }
             }
 
             // Mengubah semua elemen dibawah leading one menjadi nol
-            for (int row = i + 1; row < M.RowEff; row++) {
+            for (int baris = i + 1; baris < M.RowEff; baris++) {
                 if (M.Mat[i][leadElmtIndex(i, M)] != 0) {
-                    ratio = M.Mat[row][leadElmtIndex(i, M)] / M.Mat[i][leadElmtIndex(i, M)]; // ratio untuk pengali
+                    ratio = M.Mat[baris][leadElmtIndex(i, M)] / M.Mat[i][leadElmtIndex(i, M)]; // ratio untuk pengali
                     for (int col = 0; col < M.ColEff; col++) {
-                        M.Mat[row][col] -= ratio * (M.Mat[i][col]);
+                        M.Mat[baris][col] -= ratio * (M.Mat[i][col]);
                     }
                 }
             }
-
-            // Membentuk matriks segitiga atas dengan menukar baris
-            for (k = 0; k < M.RowEff - 1; k++) {
-                // Mencari jumlah nol di baris ke-i
-                int Nzero;
-                Nzero = 0;
-                j = 0;
-                while (j < M.ColEff - 1 && M.Mat[k][j] == 0) {
-                    Nzero++;
-                    j++;
+            upperTriangle(M);
+        }
+    }
+    //
+    public static void upperTriangle(MATRIKS M){
+        // Membentuk matriks segitiga atas dengan menukar baris
+        int i, j, k, l;
+        for (k = 0; k < M.RowEff - 1; k++) {
+            // Mencari jumlah nol di baris ke-i
+            int numZero = 0;
+            j = 0;
+            while (j < M.ColEff - 1 && isElmtZero(M, k, j)) {
+                numZero++;
+                j++;
+            }
+            // Mencari jumlah nol di baris setelah baris ke-i
+            int switchRow = -1;
+            switchRow = -1;
+            int rowZero = numZero;
+            for (int m = k + 1; m < M.RowEff; m++) {
+                int numZero2 = 0;
+                l = 0;
+                while (l < M.ColEff - 1 && isElmtZero(M, m, l)) {
+                    numZero2++;
+                    l++;
                 }
-                // Mencari jumlah nol di baris setelah baris ke-i
-                int RowToSwitch, zeroRowSw;
-                RowToSwitch = -1;
-                zeroRowSw = Nzero;
-                for (int k1 = k + 1; k1 < M.RowEff; k1++) {
-                    int NzeroX;
-                    NzeroX = 0;
-                    l = 0;
-                    while (l < M.ColEff - 1 && M.Mat[k1][l] == 0) {
-                        NzeroX++;
-                        l++;
-                    }
-                    if (NzeroX < zeroRowSw) {
-                        RowToSwitch = k1;
-                        zeroRowSw = NzeroX;
-                    }
+                if (numZero2 < rowZero) {
+                    switchRow = m;
+                    rowZero = numZero2;
                 }
-                // Menukar 2 baris
-                if (RowToSwitch != -1) {
-
-                    for (int m = 0; m < M.ColEff; m++) {
-                        temp = M.Mat[k][m];
-                        M.Mat[k][m] = M.Mat[RowToSwitch][m];
-                        M.Mat[RowToSwitch][m] = temp;
-                    }
+            }
+            // Menukar 2 baris
+            double temp;
+            if (switchRow != -1) {
+                for (int m = 0; m < M.ColEff; m++) {
+                    temp = M.Mat[k][m];
+                    M.Mat[k][m] = M.Mat[switchRow][m];
+                    M.Mat[switchRow][m] = temp;
                 }
             }
         }
     }
-    //
 
     /*** Fungsi untuk memberikan solusi kepada user ***/
-    public static void printSolution(MATRIKS M) {
+    public static String[] printSolution(MATRIKS M) {
         String[] solution = new String[0];
         String[] Char = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" };
 
@@ -281,10 +279,10 @@ public class Gauss {
         } else {
             System.out.println("There is no solution");
         }
-
+        return solution;
     }
 
-    public static void defineSolution(MATRIKS M, String[] solution, String[] Char) {
+    public static String[] defineSolution(MATRIKS M, String[] solution, String[] Char) {
         // Menentukan jenis solusi yang ditemukan dan menentukan
         // format untuk mencetak solusi
 
@@ -310,6 +308,51 @@ public class Gauss {
             for (int i = 0; i < solution.length; i++) {
                 System.out.printf("x" + (i + 1) + " = " + solution[i] + "\n");
             }
+        }
+        return solution;
+    }
+    public static void writeFileGauss(String FileName, MATRIKS Matrix, MATRIKS hasil) {
+        try (FileWriter writer = new FileWriter("../Algeo01-21057/test/output/" + FileName)) {
+            writer.write("\nInput Matrix : \n");
+            String s ="";
+            for (int i = 0; i < Matrix.RowEff; i++) {
+                for (int j = 0; j < Matrix.ColEff; j++) {
+                    String elem = String.format("%.3f", Matrix.Mat[i][j]);
+                    s += (elem + " ");
+                }
+                s += "\n";
+            }
+            s += "\n";
+            writer.write(s);
+            writer.write("\n");
+            writer.write("Matriks hasil operasi : \n");
+
+            String a ="";
+            for (int i = 0; i < hasil.RowEff; i++) {
+                for (int j = 0; j < hasil.ColEff; j++) {
+                    String elem = String.format("%.3f", hasil.Mat[i][j]);
+                    a += (elem + " ");
+                }
+                a += "\n";
+            }
+            a += "\n";
+            writer.write(a);
+            writer.write("\n");
+            
+            if (hasSolution(hasil)) {
+                writer.write("Solusi dari matrix adalah : \n");
+                // Print solusi matriks tergantung jenis solusi
+                String [] sol = printSolution(hasil);
+                for (int i=0; i< sol.length; i++){
+                    writer.write("x"+(i+1)+" = "+sol[i] +"\n");
+                }
+            } else {
+                writer.write("There is no solution");
+            }
+            writer.write("\nBerhasil menuliskan pada " + FileName);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
