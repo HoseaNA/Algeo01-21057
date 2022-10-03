@@ -182,15 +182,12 @@ public class Gauss {
     }
 
     public static void rowEchelon(MATRIKS M) {
-        /*
-         * I.S Menerima Matriks M yang telah terisi
-         * /* F.S Mengubah matriks M menjadi bentuk Row Echelon
-         */
+        
+         // I.S Menerima Matriks M yang telah terisi
+         // F.S Mengubah matriks M menjadi bentuk Row Echelon
 
         // KAMUS LOKAL
-        double ratio;
-        
-
+        double pengali;
         int i, j, k, l;
 
         // ALGORITMA
@@ -201,67 +198,72 @@ public class Gauss {
             boolean leadElmt;
 
             for (k = 0; k < M.RowEff; k++) {
-                ratio = 1;
+                pengali = 1;
                 leadElmt = true;
                 for (j = 0; j < M.ColEff; j++) {
                     if (leadElmt && !isElmtZero(M, k, j)) {
-                        ratio = 1 / M.Mat[k][j];
-                        M.Mat[k][j] *= ratio;
+                        pengali = 1 / M.Mat[k][j];
+                        M.Mat[k][j] *= pengali;
                         leadElmt = false;
                     } else if (!leadElmt && !isElmtZero(M, k, j)) {
-                        M.Mat[k][j] *= ratio;
+                        M.Mat[k][j] *= pengali;
                     }
                 }
             }
 
             // Mengubah semua elemen dibawah leading one menjadi nol
             for (int baris = i + 1; baris < M.RowEff; baris++) {
-                if (M.Mat[i][leadElmtIndex(i, M)] != 0) {
-                    ratio = M.Mat[baris][leadElmtIndex(i, M)] / M.Mat[i][leadElmtIndex(i, M)]; // ratio untuk pengali
+                int lead = leadElmtIndex(i, M);
+                if (M.Mat[i][lead] != 0) {
+                    pengali = M.Mat[baris][lead] / M.Mat[i][lead];
                     for (int col = 0; col < M.ColEff; col++) {
-                        M.Mat[baris][col] -= ratio * (M.Mat[i][col]);
+                        M.Mat[baris][col] -= pengali * (M.Mat[i][col]);
                     }
                 }
             }
+            // Ubah menjadi matriks segitiga atas
             upperTriangle(M);
         }
     }
-    //
+    
     public static void upperTriangle(MATRIKS M){
-        // Membentuk matriks segitiga atas dengan menukar baris
-        int i, j, k, l;
-        for (k = 0; k < M.RowEff - 1; k++) {
-            // Mencari jumlah nol di baris ke-i
-            int numZero = 0;
-            j = 0;
-            while (j < M.ColEff - 1 && isElmtZero(M, k, j)) {
-                numZero++;
-                j++;
-            }
-            // Mencari jumlah nol di baris setelah baris ke-i
+        // Algoritma membentuk matriks segitiga atas
+        int j, k, l;
+        for (k = 0; k < M.RowEff -1; k++) {
             int switchRow = -1;
-            switchRow = -1;
-            int rowZero = numZero;
-            for (int m = k + 1; m < M.RowEff; m++) {
-                int numZero2 = 0;
-                l = 0;
-                while (l < M.ColEff - 1 && isElmtZero(M, m, l)) {
-                    numZero2++;
-                    l++;
-                }
-                if (numZero2 < rowZero) {
-                    switchRow = m;
-                    rowZero = numZero2;
-                }
-            }
-            // Menukar 2 baris
+            findRowZero(M, k);
+            // Algoritma untuk menukar 2 baris
             double temp;
             if (switchRow != -1) {
-                for (int m = 0; m < M.ColEff; m++) {
+                for (int m = 0; m < M.ColEff; ++m) {
                     temp = M.Mat[k][m];
                     M.Mat[k][m] = M.Mat[switchRow][m];
                     M.Mat[switchRow][m] = temp;
                 }
+            }
+        }
+    }
+    public static void findRowZero(MATRIKS M, int k){
+        // Mencari jumlah nol di baris ke-i
+        int j = 0;
+        int numZero = 0;
+        while (j < M.ColEff -1 && isElmtZero(M, k, j)) {
+            ++numZero;
+            ++j;
+        }
+        // Algoritma menghitung jumlah nol di baris setelah baris ke-i
+        int switchRow;
+        int rowZero = numZero;
+        for (int m = k + 1; m < M.RowEff; ++m) {
+            int numZero2 = 0;
+            int l = 0;
+            while (l < M.ColEff -1 && isElmtZero(M, m, l)) {
+                ++numZero2;
+                ++l;
+            }
+            if (rowZero > numZero2) {
+                rowZero = numZero2;
+                switchRow = m;
             }
         }
     }
@@ -314,29 +316,29 @@ public class Gauss {
     public static void writeFileGauss(String FileName, MATRIKS Matrix, MATRIKS hasil) {
         try (FileWriter writer = new FileWriter("../Algeo01-21057/test/output/" + FileName)) {
             writer.write("\nInput Matrix : \n");
-            String s ="";
+            String str ="";
             for (int i = 0; i < Matrix.RowEff; i++) {
                 for (int j = 0; j < Matrix.ColEff; j++) {
                     String elem = String.format("%.3f", Matrix.Mat[i][j]);
-                    s += (elem + " ");
+                    str += (elem + " ");
                 }
-                s += "\n";
+                str += "\n";
             }
-            s += "\n";
-            writer.write(s);
+            str += "\n";
+            writer.write(str);
             writer.write("\n");
             writer.write("Matriks hasil operasi : \n");
 
-            String a ="";
+            String strOps ="";
             for (int i = 0; i < hasil.RowEff; i++) {
                 for (int j = 0; j < hasil.ColEff; j++) {
                     String elem = String.format("%.3f", hasil.Mat[i][j]);
-                    a += (elem + " ");
+                    strOps += (elem + " ");
                 }
-                a += "\n";
+                strOps += "\n";
             }
-            a += "\n";
-            writer.write(a);
+            strOps += "\n";
+            writer.write(strOps);
             writer.write("\n");
             
             if (hasSolution(hasil)) {

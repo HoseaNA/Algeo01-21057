@@ -34,7 +34,7 @@ Masukkan nilai dari f(2,1) :
 Masukkan nilai dari f(2,2) :
 16.000 
 
-Nilai dari f(0.25,0.75) adalah : 203.2413330078129
+Nilai dari f(0.25,0.75) adalah : 105.5147705078125
 
 
-Berhasil menuliskan pada res3.txt
+Berhasil menuliskan pada out_5c.txt
