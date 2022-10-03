@@ -297,12 +297,10 @@ public class Main {
             MATRIKS hasil = MATRIKS.copyMatriks(Matrix);
             System.out.println("Input Matrix : \n");
             MATRIKS.printMatrix(Matrix);
-            MATRIKS.printMatrix(hasil);
             System.out.println("Matriks hasil operasi : \n");
             Gauss.rowEchelon(hasil);
             Gauss.reducedRE(hasil);
             MATRIKS.printMatrix(hasil);
-            MATRIKS.printMatrix(Matrix);
             Gauss.printSolution(hasil);
 
             displaySavePromptGauss(Matrix,hasil);
