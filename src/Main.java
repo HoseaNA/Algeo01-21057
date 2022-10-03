@@ -89,8 +89,8 @@ public class Main {
     public static void displaySubRegression() {
         System.out.println("\n************Regresi Linier Berganda************");
         System.out.println("1. Mencari nilai regresi linier berganda");
-        System.out.println("9. Back to Main Menu");
-        System.out.println();
+        System.out.println("9. Back to Main Menu\n");
+        displayCommand();
     }
 
     public static void displayInputType() {
@@ -214,7 +214,7 @@ public class Main {
     /** Setiap prosedur dari pilihan main menu beserta submenu dan prosesnya **/
 
     /** PROSEDUR SPL **/
-    public static void SPL() {
+    public static void SPL() throws IOException {
 
         do {
             displaySubSPL();
@@ -333,13 +333,24 @@ public class Main {
 
     }
 
-    public static void cramer() {
-
+    public static void cramer() throws IOException {
+        do {
+            displayInputType();
+            if (choice == 1) {
+                Cramer.CramCalc1();
+                break;
+            } else if (choice == 2) {
+                Cramer.CramCalc2();
+                break;
+            } else {
+                System.out.println("Invalid input");
+                break;
+            }
+        } while (choice != 1 && choice != 2);
     }
 
     /** PROSEDUR DETERMINAN **/
     public static void determinant() throws IOException {
-
         do {
             displaySubDet();
             c = scanner.nextInt();
