@@ -116,7 +116,28 @@ public class Main {
                 System.out.println("please enter file name (.txt)");
                 String filename = scanner.nextLine();
                 // Algoritma save to file isi disini
+        
+                back = true;
+            } else if (prompt.equals("n")) {
+                back = true;
+            }
+        } while (!back);
+    }
+    public static void displaySavePromptGauss(MATRIKS Matrix, MATRIKS hasil) {
 
+        String prompt;
+        boolean back = false;
+        System.out.println("\nWould you like to save the result? (Y/N) ");
+        System.out.println("Enter Y to Save ");
+        System.out.println("Enter N to Quit\n");
+        displayCommand();
+        do {
+            prompt = scanner.nextLine().toLowerCase();
+            if (prompt.equals("y")) {
+                System.out.println("please enter file name (.txt)");
+                String filename = scanner.nextLine();
+                // Algoritma save to file isi disini
+                Gauss.writeFileGauss(filename,Matrix,hasil);
                 back = true;
             } else if (prompt.equals("n")) {
                 back = true;
@@ -212,15 +233,16 @@ public class Main {
         displayInputType();
         if (choice == 1) {
             MATRIKS.readMatrix(Matrix);
-            System.out.println("\nInput Matrix : ");
+            MATRIKS hasil = MATRIKS.copyMatriks(Matrix);
+            System.out.println("Input Matrix : \n");
             MATRIKS.printMatrix(Matrix);
-            System.out.println("Matriks hasil operasi : ");
-            Gauss.rowEchelon(Matrix);
-            MATRIKS.printMatrix(Matrix);
-            Gauss.printSolution(Matrix);
+            System.out.println("Matriks hasil operasi : \n");
+            Gauss.rowEchelon(hasil);
+            MATRIKS.printMatrix(hasil);
+            Gauss.printSolution(hasil);
 
-            displaySavePrompt();
-
+            displaySavePromptGauss(Matrix,hasil);
+            
         } else if (choice == 2) {
             // Input matriks dengan file
 
@@ -231,15 +253,15 @@ public class Main {
             // Bagian ini isi path di github
             String origin = "C:\\Users\\LENOVO\\IdeaProjects\\Tubes Algeo\\src\\SPL\\test\\";
             MATRIKS M = new MATRIKS(origin + filename);
+            MATRIKS hasil = MATRIKS.copyMatriks(M);
+            System.out.println("\nInput Matrix : \n");
+            MATRIKS.printMatrix(hasil);
+            System.out.println("Matriks hasil operasi : \n");
+            Gauss.rowEchelon(hasil);
+            MATRIKS.printMatrix(hasil);
+            Gauss.printSolution(hasil);
 
-            System.out.println("\nInput Matrix : ");
-            MATRIKS.printMatrix(M);
-            System.out.println("Matriks hasil operasi : ");
-            Gauss.rowEchelon(M);
-            MATRIKS.printMatrix(M);
-            Gauss.printSolution(M);
-
-            displaySavePrompt();
+            displaySavePromptGauss(M,hasil);
         } else {
             System.out.println("Invalid input");
         }
@@ -247,19 +269,22 @@ public class Main {
 
     public static void gaussjordanElim() {
         MATRIKS Matrix = new MATRIKS(rowCap, colcap);
-
+        
         displayInputType();
         if (choice == 1) {
             MATRIKS.readMatrix(Matrix);
-            System.out.println("Input Matrix : ");
+            MATRIKS hasil = MATRIKS.copyMatriks(Matrix);
+            System.out.println("Input Matrix : \n");
             MATRIKS.printMatrix(Matrix);
-            System.out.println("Matriks hasil operasi : ");
-            Gauss.rowEchelon(Matrix);
-            Gauss.reducedRE(Matrix);
+            MATRIKS.printMatrix(hasil);
+            System.out.println("Matriks hasil operasi : \n");
+            Gauss.rowEchelon(hasil);
+            Gauss.reducedRE(hasil);
+            MATRIKS.printMatrix(hasil);
             MATRIKS.printMatrix(Matrix);
-            Gauss.printSolution(Matrix);
+            Gauss.printSolution(hasil);
 
-            displaySavePrompt();
+            displaySavePromptGauss(Matrix,hasil);
         } else if (c == 2) {
             // Input matriks dengan file
             Scanner in = new Scanner(System.in);
@@ -267,17 +292,19 @@ public class Main {
 
             String filename = in.nextLine();
             // Bagian ini isi path di github
-            String origin = "C:\\Users\\LENOVO\\IdeaProjects\\Tubes Algeo\\src\\SPL\\test\\";
+            String origin = "C:\\Users\\LENOVO\\OneDrive - Institut Teknologi Bandung\\Documents\\GitHub\\Algeo01-21057\\test\\";
             MATRIKS M = new MATRIKS(origin + filename);
 
-            System.out.println("\nInput Matrix : ");
-            MATRIKS.printMatrix(M);
-            System.out.println("Matriks hasil operasi : ");
-            Gauss.rowEchelon(M);
-            MATRIKS.printMatrix(M);
-            Gauss.printSolution(M);
+            MATRIKS hasil = MATRIKS.copyMatriks(M);
+            System.out.println("\nInput Matrix : \n");
+            MATRIKS.printMatrix(hasil);
+            System.out.println("Matriks hasil operasi : \n");
+            Gauss.rowEchelon(hasil);
+            Gauss.reducedRE(hasil);
+            MATRIKS.printMatrix(hasil);
+            Gauss.printSolution(hasil);
 
-            displaySavePrompt();
+            displaySavePromptGauss(M,hasil);
         } else {
             System.out.println("Invalid input");
         }
