@@ -102,28 +102,6 @@ public class Main {
 
     }
 
-    public static void displaySavePrompt() {
-
-        String prompt;
-        boolean back = false;
-        System.out.println("\nWould you like to save the result? (Y/N) ");
-        System.out.println("Enter Y to Save ");
-        System.out.println("Enter N to Quit\n");
-        displayCommand();
-        do {
-            prompt = scanner.nextLine().toLowerCase();
-            if (prompt.equals("y")) {
-                System.out.println("please enter file name (.txt)");
-                String filename = scanner.nextLine();
-                // Algoritma save to file isi disini
-
-                back = true;
-            } else if (prompt.equals("n")) {
-                back = true;
-            }
-        } while (!back);
-    }
-
     public static void displaySavePromptGauss(MATRIKS Matrix, MATRIKS hasil) {
 
         String prompt;
@@ -274,7 +252,7 @@ public class Main {
 
             String filename = in.nextLine();
             // Bagian ini isi path di github
-            String origin = "C:\\Users\\LENOVO\\IdeaProjects\\Tubes Algeo\\src\\SPL\\test\\";
+            String origin = "..\\Algeo01-21057\\test\\";
             MATRIKS M = new MATRIKS(origin + filename);
             MATRIKS hasil = MATRIKS.copyMatriks(M);
             System.out.println("\nInput Matrix : \n");
@@ -313,7 +291,7 @@ public class Main {
 
             String filename = in.nextLine();
             // Bagian ini isi path di github
-            String origin = "C:\\Users\\LENOVO\\OneDrive - Institut Teknologi Bandung\\Documents\\GitHub\\Algeo01-21057\\test\\";
+            String origin = "..\\Algeo01-21057\\test\\";
             MATRIKS M = new MATRIKS(origin + filename);
 
             MATRIKS hasil = MATRIKS.copyMatriks(M);
@@ -539,7 +517,7 @@ public class Main {
                 displayCommand();
                 String filename = in.nextLine();
                 // Bagian ini isi path di github
-                String origin = "C:\\Users\\LENOVO\\IdeaProjects\\Tubes Algeo\\src\\SPL\\test\\";
+                String origin = "..\\Algeo01-21057\\test\\";
                 MATRIKS M = new MATRIKS(origin + filename);
                 // Algoritma cari interpolasi bikubik isi disini
                 double[] XY = bicubicInt.inputXY();
