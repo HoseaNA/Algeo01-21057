@@ -35,7 +35,7 @@ Hal yang perlu diunduh adalah sebagai berikut:
         ```sh 
         java -jar --enable-preview ./lib/Algeo01-21057.jar
         ```
-    - Run file main.java dengan menekan tombol berikut
+    - Run file Main.java dengan menekan tombol berikut
     
         ![Screenshot 2022-10-03 191138](https://user-images.githubusercontent.com/110534062/193573688-b00bf3f6-fe38-47c8-ba99-91c54bd15929.png)
 
