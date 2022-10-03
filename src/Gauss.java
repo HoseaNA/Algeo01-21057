@@ -1,4 +1,6 @@
 import java.text.DecimalFormat;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Gauss {
 
@@ -269,7 +271,7 @@ public class Gauss {
     //
 
     /*** Fungsi untuk memberikan solusi kepada user ***/
-    public static void printSolution(MATRIKS M) {
+    public static String[] printSolution(MATRIKS M) {
         String[] solution = new String[0];
         String[] Char = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p" };
 
@@ -281,10 +283,10 @@ public class Gauss {
         } else {
             System.out.println("There is no solution");
         }
-
+        return solution;
     }
 
-    public static void defineSolution(MATRIKS M, String[] solution, String[] Char) {
+    public static String[] defineSolution(MATRIKS M, String[] solution, String[] Char) {
         // Menentukan jenis solusi yang ditemukan dan menentukan
         // format untuk mencetak solusi
 
@@ -310,6 +312,51 @@ public class Gauss {
             for (int i = 0; i < solution.length; i++) {
                 System.out.printf("x" + (i + 1) + " = " + solution[i] + "\n");
             }
+        }
+        return solution;
+    }
+    public static void writeFileGauss(String FileName, MATRIKS Matrix, MATRIKS hasil) {
+        try (FileWriter writer = new FileWriter("../Algeo01-21057/test/output/" + FileName)) {
+            writer.write("\nInput Matrix : \n");
+            String s ="";
+            for (int i = 0; i < Matrix.RowEff; i++) {
+                for (int j = 0; j < Matrix.ColEff; j++) {
+                    String elem = String.format("%.3f", Matrix.Mat[i][j]);
+                    s += (elem + " ");
+                }
+                s += "\n";
+            }
+            s += "\n";
+            writer.write(s);
+            writer.write("\n");
+            writer.write("Matriks hasil operasi : \n");
+
+            String a ="";
+            for (int i = 0; i < hasil.RowEff; i++) {
+                for (int j = 0; j < hasil.ColEff; j++) {
+                    String elem = String.format("%.3f", hasil.Mat[i][j]);
+                    a += (elem + " ");
+                }
+                a += "\n";
+            }
+            a += "\n";
+            writer.write(a);
+            writer.write("\n");
+            
+            if (hasSolution(hasil)) {
+                writer.write("Solusi dari matrix adalah : \n");
+                // Print solusi matriks tergantung jenis solusi
+                String [] sol = printSolution(hasil);
+                for (int i=0; i< sol.length; i++){
+                    writer.write("x"+(i+1)+" = "+sol[i] +"\n");
+                }
+            } else {
+                writer.write("There is no solution");
+            }
+            writer.write("\nBerhasil menuliskan pada " + FileName);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
