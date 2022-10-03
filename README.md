@@ -29,6 +29,9 @@ Hal yang perlu diunduh adalah sebagai berikut:
     ```
 2. Kemudian pastikan _directory_ terminal pada folder Algeo01-21057 seperti berikut :
     ![Screenshot 2022-10-03 190726](https://user-images.githubusercontent.com/110534062/193573017-a19dad08-3be1-420e-a76f-b987855a87b4.png)
+    ```sh
+    Note : Memulai program menggunakan terminal dari Visual Studio Code
+    ```
 3. Ada beberapa cara untuk memulai program
     - Tulis command berikut pada terminal untuk memulai program dengan file `.jar`
     
@@ -38,7 +41,6 @@ Hal yang perlu diunduh adalah sebagai berikut:
     - Run file Main.java dengan menekan tombol berikut
     
         ![Screenshot 2022-10-03 191138](https://user-images.githubusercontent.com/110534062/193573688-b00bf3f6-fe38-47c8-ba99-91c54bd15929.png)
-
 ## Kontributor
 Program ini dibentuk oleh
 1. Hosea Nathanael Abetnego             (13521057)
