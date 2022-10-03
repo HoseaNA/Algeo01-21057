@@ -238,17 +238,17 @@ public class Regression {
                 if (i > 1) {
                     if (i != ResArr.Len-1) {
                         writer.write(Double.toString(ResArr.Arr[i]));
-                        writer.write("X");
+                        writer.write("x");
                         writer.write(Integer.toString(i));
                         writer.write(" + ");
                     } else {
                         writer.write(Double.toString(ResArr.Arr[i]));
-                        writer.write("X^");
+                        writer.write("x");
                         writer.write(Integer.toString(i));
                     }
                 } else {
                     writer.write(Double.toString(ResArr.Arr[i]));
-                    writer.write("X1 + ");
+                    writer.write("x1 + ");
                 }
             }
             writer.write("\n");
@@ -321,11 +321,14 @@ public class Regression {
         Regmat fileMat = new Regmat(0, 0);
         Regmat.readFile(fileName, fileMat);
 
+        Regmat regMat = new Regmat(100, 100);
+        Regmat.makeRegMat(regMat, fileMat.ColEff-1, fileMat.RowEff, fileMat);
+
         Regarr inputArr = new Regarr(100);
         Regarr.readArr(inputArr, fileMat.ColEff-1);
 
-        rowEchelon(fileMat);
-        String[] strArr = GaussSolver(fileMat);
+        rowEchelon(regMat);
+        String[] strArr = GaussSolver(regMat);
 
         Regarr numArr = new Regarr(100);
         Regarr.Convert(numArr, strArr);

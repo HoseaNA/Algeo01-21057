@@ -50,9 +50,9 @@ public class Regmat {
 
     }
 
-    public static void readFile(String path, Regmat Matrix) {
+    public static void readFile(String fileName, Regmat Matrix) {
         try {
-            File file = new File (path);
+            File file = new File ("../Algeo01-21057/test/" + fileName);
             Scanner scanner = new Scanner(file);
             if (scanner.hasNextLine()){
                 while (scanner.hasNextLine()) {

@@ -537,21 +537,19 @@ public class Main {
     }
 
     public static void regMetode1() throws IOException {
-        int input = 0;
         do {
             displayInputType();
-            input = scanner.nextInt();
-            if (input == 1) {
+            if (choice == 1) {
                 Regression.RegCalc1();
                 break;
-            } else if (input == 2) {
+            } else if (choice == 2) {
                 Regression.RegCalc2();
                 break;
             } else {
                 System.out.println("Invalid input");
                 break;
             }
-        } while (input != 1 && input != 2);
+        } while (choice != 1 && choice != 2);
     }
 
 }
