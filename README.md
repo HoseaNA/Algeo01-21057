@@ -13,6 +13,7 @@ Terdapat beberapa direktori pada _repository_ ini, yaitu:
 2. `docs` berisi laporan.
 3. `src` berisi source code dari program java.
 4. `test` berisi data uji program.
+5. `lib` berisi file `.jar`.
 
 ## Cara Menjalankan Program
 ### Unduh Keperluan Program
@@ -23,10 +24,20 @@ Hal yang perlu diunduh adalah sebagai berikut:
 ### Memulai Program
 1. _Clone_ _repository_ berikut
     ```sh
-    git clone https://github.com/HoseaNA/Algeo01-21057.git
+    https://github.com/HoseaNA/Algeo01-21057.git
     ```
-2. Kemudian...
-   
+2. Kemudian pastikan _directory_ terminal pada folder Algeo01-21057 seperti berikut :
+    ![Screenshot 2022-10-03 190726](https://user-images.githubusercontent.com/110534062/193573017-a19dad08-3be1-420e-a76f-b987855a87b4.png)
+3. Ada beberapa cara untuk memulai program
+    - Tulis command berikut pada terminal untuk memulai program dengan file `.jar`
+    
+        ```sh 
+        java -jar --enable-preview ./lib/Algeo01-21057.jar
+        ```
+    - Run file main.java dengan menekan tombol berikut
+    
+        ![Screenshot 2022-10-03 191138](https://user-images.githubusercontent.com/110534062/193573688-b00bf3f6-fe38-47c8-ba99-91c54bd15929.png)
+
 ## Kontributor
 Program ini dibentuk oleh
 1. Hosea Nathanael Abetnego             (13521057)
