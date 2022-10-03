@@ -85,6 +85,7 @@ public class Reduction {
         try (FileWriter writer = new FileWriter("../Algeo01-21057/test/output/" + FileName)) {
             writer.write("Determinan matriks:\n");
             writer.write(Double.toString(redRes));
+            writer.write("\n");
             writer.write("Berhasil menuliskan pada " + FileName);
             writer.close();
         } catch (IOException e) {
@@ -118,7 +119,7 @@ public class Reduction {
         System.out.println("\nMasukkan nama file:");
         String fileName = scanner.nextLine();
 
-        Detmat inputMat = new Detmat(100, 100);
+        Detmat inputMat = new Detmat(0, 0);
         Detmat.readFile(fileName, inputMat);
 
         double RedRes = RedSolve(inputMat);

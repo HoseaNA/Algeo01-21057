@@ -319,11 +319,10 @@ public class Main {
     }
 
     /** PROSEDUR DETERMINAN **/
-    public static void determinant() {
+    public static void determinant() throws IOException {
 
         do {
             displaySubDet();
-            displayCommand();
             c = scanner.nextInt();
             if (c == 1) { // Metode determinan cara 1
                 detMetode1();
@@ -335,76 +334,36 @@ public class Main {
         } while (c != 9);
     }
 
-    public static void detMetode1() {
-        int input = 0;
-        MATRIKS Matrix = new MATRIKS(rowCap, colcap);
+    public static void detMetode1() throws IOException {
         do {
             displayInputType();
-            input = scanner.nextInt();
-            if (input == 1) {
-                // Input matriks dengan keyboard
-                MATRIKS.readMatrix(Matrix);
-                // Algoritma cari determinan isi disini
-
-                // Save prompt
-                displaySavePrompt();
+            if (choice == 1) {
+                Expansion.ExpCalc1();
                 break;
-            } else if (input == 2) {
-                // Input matriks dengan file
-                Scanner in = new Scanner(System.in);
-                System.out.println("Please enter input file (.txt)");
-
-                String filename = in.nextLine();
-                // Bagian ini isi path di github
-                String origin = "C:\\Users\\LENOVO\\IdeaProjects\\Tubes Algeo\\src\\SPL\\test\\";
-                MATRIKS M = new MATRIKS(origin + filename);
-
-                // Algoritma cari determinan isi disini
-
-                // Save prompt
-                displaySavePrompt();
+            } else if (choice == 2) {
+                Expansion.ExpCalc2();
                 break;
             } else {
                 System.out.println("Invalid input");
                 break;
             }
-        } while (input != 1 && input != 2);
+        } while (choice != 1 && choice != 2);
     }
 
-    public static void detMetode2() {
-        int input = 0;
-        MATRIKS Matrix = new MATRIKS(rowCap, colcap);
+    public static void detMetode2() throws IOException {
         do {
             displayInputType();
-            input = scanner.nextInt();
-            if (input == 1) {
-                // Input matriks dengan keyboard
-                MATRIKS.readMatrix(Matrix);
-                // Algoritma cari determinan isi disini
-
-                // Save prompt
-                displaySavePrompt();
+            if (choice == 1) {
+                Reduction.RedCalc1();
                 break;
-            } else if (input == 2) {
-                // Input matriks dengan file
-                Scanner in = new Scanner(System.in);
-                System.out.println("Please enter input file (.txt)");
-
-                String filename = in.nextLine();
-                // Bagian ini isi path di github
-                String origin = "C:\\Users\\LENOVO\\IdeaProjects\\Tubes Algeo\\src\\SPL\\test\\";
-                MATRIKS M = new MATRIKS(origin + filename);
-
-                // Algoritma cari determinan isi disini
-
-                // Save prompt
-                displaySavePrompt();
+            } else if (choice == 2) {
+                Reduction.RedCalc2();
                 break;
             } else {
                 System.out.println("Invalid input");
                 break;
             }
-        } while (input != 1 && input != 2);
+        } while (choice != 1 && choice != 2);
     }
 
     public static void inverse() throws IOException {
